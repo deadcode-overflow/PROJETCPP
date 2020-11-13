@@ -1,0 +1,19 @@
+run : main
+	./main
+
+main : main.o Sommet.o ArbreB.o
+	g++ -o main -Wall -Wextra -O2 main.o Sommet.o ArbreB.o
+
+main.o : Sommet.h ArbreB.h
+	g++ -c main.cpp
+
+Sommet.o : Sommet.h
+	g++ -c Sommet.cpp
+
+ArbreB.o : ArbreB.h Sommet.h
+	g++ -c ArbreB.cpp
+
+clean :
+	rm -f *.o
+	rm -f main
+	clear
