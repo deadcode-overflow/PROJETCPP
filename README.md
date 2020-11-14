@@ -1,11 +1,11 @@
 *Auteurs : Dylan HARAL et Tinhinane BERKANI*
+
 *Projet C++ : Cryptage et décryptage*
 
 ---
 
 # Programme
 ---
-
 Le programme est répartie en 6 fichiers :
 
  * `main.cpp` : qui contient le programme principal.
@@ -17,11 +17,11 @@ Le programme est répartie en 6 fichiers :
  * `Makefile` : qui permet de compiler tous les fichiers et d'executer le fichier executable `main`.
 
 ## main.cpp :
-
+---
 Le fichier `main.cpp` contient la fonctinon main et le programme principal.
 
 ## Sommet.h et Sommet.h :
-
+---
 Le sommet d'un arbre binaire est représenté par la classe `Sommet` définie de la façon suivante :
 
  * elle contient un caractère, représenté par une `lettre`. Ainsi que la fréquence de cette lettre, représentée par l'entier `freq`.
@@ -33,7 +33,7 @@ Le sommet d'un arbre binaire est représenté par la classe `Sommet` définie de
  * elle possède deux getters, qui retournent la lettre et la fréquence.
 
 ## ArbreB.h et ArbreB.cpp :
-
+---
 L'arbre binaire est représenté par la classe `ArbreB` définie de la façon suivante :
 
  * elle hérite de la classe `Sommet`.
