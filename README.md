@@ -4,6 +4,7 @@
 ---
 
 # Programme
+---
 
 Le programme est répartie en 6 fichiers :
 
@@ -15,11 +16,11 @@ Le programme est répartie en 6 fichiers :
  
  * `Makefile` : qui permet de compiler tous les fichiers et d'executer le fichier executable `main`.
 
-## main.cpp
+## main.cpp :
 
-Le fichier main.cpp contient la fonctinon main et le programme principal.
+Le fichier `main.cpp` contient la fonctinon main et le programme principal.
 
-## Sommet.h et Sommet.h
+## Sommet.h et Sommet.h :
 
 Le sommet d'un arbre binaire est représenté par la classe `Sommet` définie de la façon suivante :
 
@@ -31,7 +32,7 @@ Le sommet d'un arbre binaire est représenté par la classe `Sommet` définie de
 
  * elle possède deux getters, qui retournent la lettre et la fréquence.
 
-## ArbreB.h et ArbreB.cpp
+## ArbreB.h et ArbreB.cpp :
 
 L'arbre binaire est représenté par la classe `ArbreB` définie de la façon suivante :
 
@@ -47,12 +48,12 @@ L'arbre binaire est représenté par la classe `ArbreB` définie de la façon su
 
  * elle possède deux getters, qui retournent la racine de l'arbre et le parent de cette racine.
 
- * elle possède une méthode ajouter, qui ajoute un sommet dans l'arbre binaire.
+ * elle possède une méthode `ajouter`, qui ajoute un sommet dans l'arbre binaire.
 
- * elle possède une méthode supprimer, qui supprime un sommet dans l'arbre binaire.
+ * elle possède une méthode `supprimer`, qui supprime un sommet dans l'arbre binaire.
 
- * elle possède une méthode décomposser, qui décomposse l'arbre en deux arbres distincts.
+ * elle possède une méthode `décomposser`, qui décomposse l'arbre en deux arbres distincts.
 
- * elle possède une méthode fusion, qui fusionnne deux arbres en un unique arbre binaire.
+ * elle possède une méthode `fusion`, qui fusionnne deux arbres en un unique arbre binaire.
 
- * elle possède une méthode qui permet de supprimer l'ensemble de l'arbre binaire.
+ * elle possède une méthode `supprimerArbre` qui permet de supprimer l'ensemble de l'arbre binaire.
