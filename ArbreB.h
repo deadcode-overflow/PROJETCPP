@@ -7,21 +7,21 @@ class ArbreB : public Sommet
 {
 	private :
 		Sommet* racine;
-		Sommet* parent;
 	public :
 		ArbreB* droite;
 		ArbreB* gauche;
+		ArbreB* parent;
 
 		ArbreB();
 		ArbreB(const Sommet& s);
-		ArbreB(const Sommet& s, Sommet* &Sparent);
-		ArbreB(const Sommet& s, Sommet* &Sparent, ArbreB* Adroite, ArbreB* Agauche);
+		ArbreB(const Sommet& s, ArbreB* Aparent);
+		ArbreB(const Sommet& s, ArbreB* Aparent, ArbreB* Adroite, ArbreB* Agauche);
 		~ArbreB();
 
 		Sommet* getSommet();
-		Sommet* getParent();
+		ArbreB* getParent();
 
-		ArbreB& ajouter(const Sommet& s, Sommet* &parent, ArbreB* A);
+		ArbreB& ajouter(const Sommet& s, ArbreB* parent, ArbreB* A);
 		ArbreB& supprimer(const Sommet& s, const ArbreB* A);
 		void afficher(const ArbreB* A);
 		void supprimerArbre(const ArbreB* A);

@@ -20,17 +20,17 @@ ArbreB::ArbreB(const Sommet& s) {
 	gauche = nullptr;
 }
 
-ArbreB::ArbreB(const Sommet& s, Sommet* &Sparent) {
+ArbreB::ArbreB(const Sommet& s, ArbreB* Aparent) {
 	cout << "dans le constructeur arbre(sommet, parent)" << endl;
-	parent = new Sommet(Sparent);
+	parent = Aparent;
 	racine = new Sommet(s);
 	droite = nullptr;
 	gauche = nullptr;
 }
 
-ArbreB::ArbreB(const Sommet& s, Sommet* &Sparent, ArbreB* Adroite, ArbreB* Agauche) {
+ArbreB::ArbreB(const Sommet& s, ArbreB* Aparent, ArbreB* Adroite, ArbreB* Agauche) {
 	cout << "dans le constructeur arbre(sommet, droite, gauche, parent)" << endl;
-	parent = new Sommet(Sparent);
+	parent = Aparent;
 	racine = new Sommet(s);
 	droite = Adroite;
 	gauche = Agauche;
@@ -44,11 +44,11 @@ Sommet* ArbreB::getSommet() {
 	return racine;
 }
 
-Sommet* ArbreB::getParent() {
+ArbreB* ArbreB::getParent() {
 	return parent;
 }
 
-ArbreB& ArbreB::ajouter(const Sommet& s, Sommet* &parent, ArbreB* A) {
+ArbreB& ArbreB::ajouter(const Sommet& s, ArbreB* parent, ArbreB* A) {
 
 	if(racine == nullptr) {
 		ArbreB* arbre = new ArbreB(s);
@@ -58,35 +58,24 @@ ArbreB& ArbreB::ajouter(const Sommet& s, Sommet* &parent, ArbreB* A) {
 	
 		if(A->droite == nullptr) {
 			cout << "création droite" << endl;
-			if (A->parent != nullptr) {
-				A->droite = new ArbreB(s, A->parent);
-				return *this;
-			}
-			else {
-				A->droite = new ArbreB(s, racine);
-				return *this;
-			}
+				
+			A->droite = new ArbreB(s, parent);
+			return *this;
 		}
 		
 		if(A->gauche == nullptr) {
 			cout << "création gauche" << endl;
-			if(A->parent != nullptr) {
-				A->gauche = new ArbreB(s, A->parent);
-				return *this;
-			}
-			else {
-				A->gauche = new ArbreB(s, racine);
-				return *this;
-			}
-			
+
+			A->gauche = new ArbreB(s, parent);
+			return *this;			
 		}
-		
+		/*
 		if(A->droite != nullptr) {
-			ajouter(s, A->racine, A->droite);
+			ajouter(s, A, A->droite);
 		}
 		if(A->gauche != nullptr){
-			ajouter(s, A->racine, A->gauche);
-		}
+			ajouter(s, A, A->gauche);
+		}*/
 	}
 
 	return *this;
@@ -113,7 +102,7 @@ void ArbreB::afficher(const ArbreB* A) {
 		return;
 	}
 	if(A->parent != nullptr) { 
-		cout << "(" << A->parent->getChar() << ") -> (" << A->racine->getChar() << ")" << endl;
+		cout << "(" << A->parent->racine->getChar() << ") -> (" << A->racine->getChar() << ")" << endl;
 	}
 	else {
 		cout << "(" << racine->getChar() << ")" << endl;

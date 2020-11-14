@@ -16,24 +16,24 @@ int main() {
     cout << "sommet 1 : " << s.getChar() << " " << s.getFreq()  << endl;
 
     ArbreB A1(s);
-    Sommet* R = A1.getSommet();
+
     cout << "racine de l'arbre : "<< A1.getSommet()->getChar() << " " << A1.getSommet()->getFreq() << endl;
 	
 	cout << "............B2..............." << endl;
 	cout << "dans le ajouter sommet - 1" << endl;
-    A1.ajouter(s2, R, &A1);
+    A1.ajouter(s2, &A1, &A1);
     cout << "............C1..............." << endl;
     cout << "dans le ajouter sommet - 2" << endl;
-    A1.ajouter(s3, R, &A1);
+    A1.ajouter(s3, &A1, &A1);
     cout << "............D3..............." << endl;
     cout << "dans le ajouter sommet - 3" << endl;
-    A1.ajouter(s4, R,  &A1);
+    A1.ajouter(s4, &A1,  &A1);
     cout << "............E4..............." << endl;
     cout << "dans le ajouter sommet - 4" << endl;
-    A1.ajouter(s5, R, &A1);
+    A1.ajouter(s5, &A1, &A1);
 	cout << "............F2..............." << endl;
     cout << "dans le ajouter sommet - 5" << endl;
-    A1.ajouter(s6, R, &A1);
+    A1.ajouter(s6, &A1, &A1);
     cout << "..........................." << endl;
 
     cout << "parent-enfant" << endl;
