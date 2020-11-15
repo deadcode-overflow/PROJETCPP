@@ -4,120 +4,110 @@
 
 using namespace std;
 
-ArbreB::ArbreB() {
+ArbreB::ArbreB() : racine(), precedent(0), droite(0), gauche(0) {
 	cout << "dans le constructeur arbre par defaut" << endl;
-	parent = nullptr;
-	racine = nullptr;
-	droite = nullptr;
-	gauche = nullptr;
 }
 
-ArbreB::ArbreB(const Sommet& s) {
+ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {
 	cout << "dans le constructeur arbre(sommet)" << endl;
-	parent = nullptr;
-	racine = new Sommet(s);
-	droite = nullptr;
-	gauche = nullptr;
 }
 
-ArbreB::ArbreB(const Sommet& s, ArbreB* Aparent) {
-	cout << "dans le constructeur arbre(sommet, parent)" << endl;
-	parent = Aparent;
-	racine = new Sommet(s);
-	droite = nullptr;
-	gauche = nullptr;
+ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauche(0) {
+	cout << "dans le constructeur arbre(sommet, precedent)" << endl;
 }
 
-ArbreB::ArbreB(const Sommet& s, ArbreB* Aparent, ArbreB* Adroite, ArbreB* Agauche) {
-	cout << "dans le constructeur arbre(sommet, droite, gauche, parent)" << endl;
-	parent = Aparent;
-	racine = new Sommet(s);
-	droite = Adroite;
-	gauche = Agauche;
-}
+/*ArbreB::ArbreB(ArbreB& A) {
+	cout << "dans le constructeur arbre par copie" << endl;
+}*/
 
 ArbreB::~ArbreB() {
 	cout << "destructeur ArbreB" << endl;
 }
 
-Sommet* ArbreB::getSommet() {
+Sommet& ArbreB::getSommet() {
 	return racine;
 }
 
-ArbreB* ArbreB::getParent() {
-	return parent;
+ArbreB* ArbreB::getDroite() {
+	return droite;
 }
 
-ArbreB& ArbreB::ajouter(const Sommet& s, ArbreB* parent, ArbreB* A) {
+ArbreB* ArbreB::getGauche() {
+	return gauche;
+}
 
-	if(racine == nullptr) {
-		ArbreB* arbre = new ArbreB(s);
+ArbreB* ArbreB::getPrecedent() {
+	return precedent;
+}
+
+ArbreB& ArbreB::ajouter(Sommet& s) {
+	cout << "dans le ajouter sommet" << endl;
+	if(racine.getChar() == 0) {
+		racine = s;
+		droite = nullptr;
+		gauche = nullptr;
+		precedent = nullptr;
+
 		return *this;
 	}
+
+	ArbreB* tmp = this;
+	ArbreB* prec = nullptr;
+
+	while(tmp) {
+		prec = tmp;
+
+		if(s.getChar() < tmp->racine.getChar()) {
+			tmp = tmp->gauche;
+			cout << "--- deplacement à gauche ---" << endl; 
+		}
+		else {
+			tmp = tmp->droite;
+			cout << "--- déplacement à droite ---" << endl;
+		}
+	}
+
+	if(s.getChar() < prec->racine.getChar()) {
+		prec->gauche = new ArbreB(s, prec);
+		cout << "--- creation -- gauche ---" << endl;
+	}
 	else {
-	
-		if(A->droite == nullptr) {
-			cout << "création droite" << endl;
-				
-			A->droite = new ArbreB(s, parent);
-			return *this;
-		}
-		
-		if(A->gauche == nullptr) {
-			cout << "création gauche" << endl;
-
-			A->gauche = new ArbreB(s, parent);
-			return *this;			
-		}
-		/*
-		if(A->droite != nullptr) {
-			ajouter(s, A, A->droite);
-		}
-		if(A->gauche != nullptr){
-			ajouter(s, A, A->gauche);
-		}*/
+		prec->droite = new ArbreB(s, prec);
+		cout << "--- creation -- droite ---" << endl;
 	}
 
 	return *this;
 }
 
-ArbreB& ArbreB::supprimer(const Sommet& s, const ArbreB* A) {
+
+ArbreB& ArbreB::supprimer(Sommet& s) {
 	cout << "dans le supprimer sommet" << endl;
-/*	
-	Sommet* p, fd, fg;
 
-	if(racine == s) {
-		delete s;
-	}
-	supprimer(s, A->droite);
-	supprimer(s, A->gauche);
-*/
 	return *this;
 }
 
-void ArbreB::afficher(const ArbreB* A) {
+// affichage préfixe (gauche->racine->droite)
+void ArbreB::afficher(ArbreB* A) {
 
-	if(racine == nullptr) {
+	if(racine.getChar() == 0) {
 		cout << "l'arbre est vide" << endl;
 		return;
 	}
-	if(A->parent != nullptr) { 
-		cout << "(" << A->parent->racine->getChar() << ") -> (" << A->racine->getChar() << ")" << endl;
-	}
-	else {
-		cout << "(" << racine->getChar() << ")" << endl;
-	}
 
-	if(A->droite != nullptr) {
+	if(A) {
+		afficher(A->gauche);
+		cout << A->racine;
 		afficher(A->droite);
 	}
-	
-	if(A->gauche != nullptr) {
-		afficher(A->gauche);
-	}
+
+	cout << endl;
 }
 
-void ArbreB::supprimerArbre(const ArbreB* A) {
+/*ostream& operator<<(ostream& flux, ArbreB* A) {
+	return flux;
+}*/
+
+/*void ArbreB::supprimerArbre(ArbreB* A) {
 	cout << "dans le supprimer arbre" << endl;
 
 	if(A->droite != nullptr) {
@@ -128,5 +118,5 @@ void ArbreB::supprimerArbre(const ArbreB* A) {
 		supprimerArbre(A->gauche);
 	}
 
-	delete A->racine;
-}
+	delete A;
+}*/

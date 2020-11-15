@@ -2,28 +2,37 @@
 #define ARBREB_H
 
 #include "Sommet.h"
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
 
 class ArbreB : public Sommet
 {
-	private :
-		Sommet* racine;
-	public :
+	protected :
+		Sommet racine;
 		ArbreB* droite;
 		ArbreB* gauche;
-		ArbreB* parent;
-
+		ArbreB* precedent;
+	public :
 		ArbreB();
-		ArbreB(const Sommet& s);
-		ArbreB(const Sommet& s, ArbreB* Aparent);
-		ArbreB(const Sommet& s, ArbreB* Aparent, ArbreB* Adroite, ArbreB* Agauche);
+		ArbreB(Sommet& s);
+		ArbreB(Sommet& s, ArbreB* A);
+		//ArbreB(ArbreB& A); //constructeur par copie (non utilisé pour l'instant)
 		~ArbreB();
 
-		Sommet* getSommet();
-		ArbreB* getParent();
+		ArbreB& ajouter(Sommet& s); //operateur +  (A + s)
+		ArbreB& supprimer(Sommet& s); //operateur - (A - s)
+		ArbreB& fusionner(ArbreB& A); //operateur + (A + A)
+		ArbreB& decomposer();
 
-		ArbreB& ajouter(const Sommet& s, ArbreB* parent, ArbreB* A);
-		ArbreB& supprimer(const Sommet& s, const ArbreB* A);
-		void afficher(const ArbreB* A);
-		void supprimerArbre(const ArbreB* A);
+		Sommet& getSommet();
+		ArbreB* getDroite();
+		ArbreB* getGauche();
+		ArbreB* getPrecedent();
+
+		void afficher(ArbreB* A); //operateur <<
+		//friend ostream& operator<<(ostream& flux, ArbreB& A); // cout << A
+		//void supprimerArbre(ArbreB* A); //inutile pour l'instant
 };
 #endif

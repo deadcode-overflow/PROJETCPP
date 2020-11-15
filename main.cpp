@@ -6,39 +6,64 @@ using namespace std;
 
 int main() {
 
-	Sommet s('A', 1);
-	Sommet s2('B', 2);
-	Sommet s3('C', 1);
-	Sommet s4('D', 3);
-	Sommet s5('E', 4);
-	Sommet s6('F', 2);
+    //--------------test-des-sommets------------------
+    cout << endl;
+    //test affichage constructeur par valeur
+	Sommet s('A', 4);
+    cout <<  "s -> " << s << endl;
+    //test affichage constructeur par défaut
+    Sommet defaut;
+    cout << "def -> " << defaut << endl;
+    //test affectation
+    Sommet s2('B', 1);
+    cout << "s2 -> " << s2 << endl;
+    defaut = s2;
+    cout << "affectation def = s2" << endl;
+    cout << "def -> " << defaut << endl;
+    //test égalité
+    Sommet s3('A', 4);
+    cout << "s3 -> " << s3 << endl;
+    cout << "comparaison s == s3" << endl;
+    if(s == s3)
+        cout << "s et s3 sont égaux" << endl;
+    else
+        cout << "s et s3 ne sont pas égaux" << endl;
+    cout << endl;
+    //test affichage constructeur par copie
+    Sommet copie(s);
+    cout << "copie de s" << endl;
+    cout << "sommmet 'copie' de 's' -> " << copie << endl;
+    //-------------------------------------------------
 
-    cout << "sommet 1 : " << s.getChar() << " " << s.getFreq()  << endl;
-
-    ArbreB A1(s);
-
-    cout << "racine de l'arbre : "<< A1.getSommet()->getChar() << " " << A1.getSommet()->getFreq() << endl;
-	
-	cout << "............B2..............." << endl;
-	cout << "dans le ajouter sommet - 1" << endl;
-    A1.ajouter(s2, &A1, &A1);
-    cout << "............C1..............." << endl;
-    cout << "dans le ajouter sommet - 2" << endl;
-    A1.ajouter(s3, &A1, &A1);
-    cout << "............D3..............." << endl;
-    cout << "dans le ajouter sommet - 3" << endl;
-    A1.ajouter(s4, &A1,  &A1);
-    cout << "............E4..............." << endl;
-    cout << "dans le ajouter sommet - 4" << endl;
-    A1.ajouter(s5, &A1, &A1);
-	cout << "............F2..............." << endl;
-    cout << "dans le ajouter sommet - 5" << endl;
-    A1.ajouter(s6, &A1, &A1);
-    cout << "..........................." << endl;
-
-    cout << "parent-enfant" << endl;
-    A1.afficher(&A1);
-    A1.supprimerArbre(&A1);
+    //--------------test-de-l'arbre-binaire------------
+    //test affichage constructeur par défaut
+    ArbreB AbrDefaut;
+    cout << "creation de d'un arbre par défaut" << endl;
+    AbrDefaut.afficher(&AbrDefaut);
+    //test affichage constructeur par valeur
+    ArbreB A(s);
+    cout << "creation de l'arbre de racine s" << endl;
+    A.afficher(&A);
+    //test ajout d'un sommet dans l'arbre
+    A.ajouter(s2);
+    cout << "ajout de s2 dans l'arbre" << endl;
+    A.afficher(&A);
+    //test ajout de plusieurs sommet dans l'arbre
+    Sommet s4('C',1);
+    cout << "s4 -> " << s4 << endl;
+    Sommet s5('D',2);
+    cout << "s5 -> " << s5 << endl;
+    Sommet s6('E',3);
+    cout << "s6 -> " << s6 << endl;
+    Sommet s7('F',2);
+    cout << "s7 -> " << s7 << endl;
+    A.ajouter(s4);
+    A.ajouter(s5);
+    A.ajouter(s6);
+    A.ajouter(s7);
+    cout << "ajout de plusieurs sommets dans l'arbre" << endl;
+    A.afficher(&A);
+    //-------------------------------------------------
 
     return 0;
 }
