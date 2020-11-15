@@ -21,7 +21,7 @@ class ArbreB : public Sommet
 		//ArbreB(ArbreB& A); //constructeur par copie (non utilisé pour l'instant)
 		~ArbreB();
 
-		ArbreB& ajouter(Sommet& s); //operateur +  (A + s) fait
+		ArbreB& ajouter(Sommet& s); //operateur +  (A + s) - fait
 		ArbreB& supprimer(Sommet& s); //operateur - (A - s) - a faire
 		Sommet& rechercher(Sommet& s); // fait
 		ArbreB& modifier(Sommet& s); //a faire
