@@ -22,6 +22,13 @@ char Sommet::getChar() {
 	return lettre;
 }
 
+void Sommet::setFreq(int i) {
+	freq = i;
+}
+
+void Sommet::setChar(char c) {
+	lettre = c;
+}
 
 bool Sommet::operator ==(Sommet& s) {
 	if(lettre == s.lettre && freq == s.freq) {
@@ -30,6 +37,14 @@ bool Sommet::operator ==(Sommet& s) {
 	else {
 		return false;
 	}
+}
+
+bool Sommet::operator <(Sommet& s) {
+	return lettre < s.lettre;
+}
+
+bool Sommet::operator >(Sommet& s) {
+	return lettre > s.lettre;
 }
 
 Sommet& Sommet::operator=(Sommet& s) {

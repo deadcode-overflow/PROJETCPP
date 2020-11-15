@@ -63,6 +63,10 @@ int main() {
     A.ajouter(s7);
     cout << "ajout de plusieurs sommets dans l'arbre" << endl;
     A.afficher(&A);
+    //test rechecher un sommet dans l'arbre
+    Sommet sommetArbre = A.rechercher(s5);
+    cout << "recherche du sommet s5 dans l'arbre" << endl;
+    cout << " sommet de l'arbre -> " << sommetArbre << endl;
     //-------------------------------------------------
 
     return 0;

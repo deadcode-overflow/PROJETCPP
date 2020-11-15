@@ -18,8 +18,12 @@ class Sommet {
 
 		int getFreq();
 		char getChar();
+		void setFreq(int i);
+		void setChar(char c);
 
 		bool operator ==(Sommet& s); // s1 == s2
+		bool operator <(Sommet& s); // s1 < s2
+		bool operator >(Sommet& s); // s1 > s2
 		Sommet& operator=(Sommet& s); //s1 = s2
 		friend ostream& operator<<(ostream& flux, Sommet& s); // cout << s
 		friend ostream& operator<<(ostream& flux, Sommet* s); // cout << *s

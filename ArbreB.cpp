@@ -57,7 +57,7 @@ ArbreB& ArbreB::ajouter(Sommet& s) {
 	while(tmp) {
 		prec = tmp;
 
-		if(s.getChar() < tmp->racine.getChar()) {
+		if(s < tmp->racine) {
 			tmp = tmp->gauche;
 			cout << "--- deplacement à gauche ---" << endl; 
 		}
@@ -67,7 +67,7 @@ ArbreB& ArbreB::ajouter(Sommet& s) {
 		}
 	}
 
-	if(s.getChar() < prec->racine.getChar()) {
+	if(s < prec->racine) {
 		prec->gauche = new ArbreB(s, prec);
 		cout << "--- creation -- gauche ---" << endl;
 	}
@@ -86,7 +86,45 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 	return *this;
 }
 
-// affichage préfixe (gauche->racine->droite)
+Sommet& ArbreB::rechercher(Sommet& s) {
+
+	ArbreB* tmp = this;
+
+	while(tmp) {
+		if( s == tmp->racine) {
+			return s;
+		}
+		else {
+			if(s < tmp->racine) {
+				tmp = tmp->gauche;
+			}
+			else {
+				tmp = tmp->droite;
+			}
+		}
+	}
+
+	cout << "le sommet n'est pas dans l'arbre" << endl;
+	
+	s.setChar('\0');
+	s.setFreq(0);
+
+	return s;
+}
+
+ArbreB& ArbreB::modifier(Sommet& s) {
+	return *this;
+}
+
+ArbreB& ArbreB::fusionner(ArbreB& A) {
+	return *this;
+}
+
+ArbreB& ArbreB::decomposer() {
+	return *this;
+}
+
+// affichage infixe (gauche->racine->droite)
 void ArbreB::afficher(ArbreB* A) {
 
 	if(racine.getChar() == 0) {
