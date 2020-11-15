@@ -21,13 +21,13 @@ class ArbreB : public Sommet
 		//ArbreB(ArbreB& A); //constructeur par copie (non utilisé pour l'instant)
 		~ArbreB();
 
-		ArbreB& ajouter(Sommet& s); //operateur +  (A + s)
+		ArbreB& ajouter(Sommet& s); //operateur +  (A + s) fait
 		ArbreB& supprimer(Sommet& s); //operateur - (A - s) - a faire
-		Sommet& rechercher(Sommet& s); //a faire
+		Sommet& rechercher(Sommet& s); // fait
 		ArbreB& modifier(Sommet& s); //a faire
 		ArbreB& fusionner(ArbreB& A); //operateur + (A + A) - a faire
-		ArbreB& decomposer(); // A -> Ad + Ag
-		void afficher(ArbreB* A); //operateur <<
+		ArbreB& decomposer(); // A -> Ad + Ag - a faire
+		void afficher(ArbreB* A); //operateur << - fait
 
 		Sommet& getSommet();
 		ArbreB* getDroite();
