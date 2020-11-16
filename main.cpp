@@ -67,6 +67,10 @@ int main() {
     Sommet sommetArbre = A.rechercher(s5);
     cout << "recherche du sommet s5 dans l'arbre" << endl;
     cout << " sommet de l'arbre -> " << sommetArbre << endl;
+    //test modifier un sommmet dans l'arbre
+    A.modifier(s6, 'K', 6);
+    cout << "modification du sommet s6 dans l'arbre par 'K' '6'" << endl;
+    A.afficher(&A);
     //-------------------------------------------------
 
     return 0;
