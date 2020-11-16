@@ -23,8 +23,8 @@ class ArbreB : public Sommet
 
 		ArbreB& ajouter(Sommet& s); //operateur +  (A + s) - fait
 		ArbreB& supprimer(Sommet& s); //operateur - (A - s) - a faire
-		Sommet& rechercher(Sommet& s); // fait
-		ArbreB& modifier(Sommet& s); //a faire
+		Sommet& rechercher(Sommet& s); //fait
+		ArbreB& modifier(Sommet& s, char c, int f); //fait
 		ArbreB& fusionner(ArbreB& A); //operateur + (A + A) - a faire
 		ArbreB& decomposer(); // A -> Ad + Ag - a faire
 		void afficher(ArbreB* A); //operateur << - fait

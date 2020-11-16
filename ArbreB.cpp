@@ -91,7 +91,7 @@ Sommet& ArbreB::rechercher(Sommet& s) {
 	ArbreB* tmp = this;
 
 	while(tmp) {
-		if( s == tmp->racine) {
+		if(s == tmp->racine) {
 			return s;
 		}
 		else {
@@ -104,15 +104,36 @@ Sommet& ArbreB::rechercher(Sommet& s) {
 		}
 	}
 
-	cout << "le sommet n'est pas dans l'arbre" << endl;
-	
+	cout << "le sommet n'existe pas dans l'arbre" << endl;
+
 	s.setChar('\0');
 	s.setFreq(0);
 
 	return s;
 }
 
-ArbreB& ArbreB::modifier(Sommet& s) {
+ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
+
+	ArbreB* tmp = this;
+
+	while(tmp) {
+		if(s == tmp->racine) {
+			tmp->racine.setChar(c);
+			tmp->racine.setFreq(f);
+			return *this;
+		}
+		else {
+			if(s < tmp->racine) {
+				tmp = tmp->gauche;
+			}
+			else {
+				tmp = tmp->droite;
+			}
+		}
+	}
+
+	cout << "le sommet n'existe pas dans l'arbre" << endl;
+
 	return *this;
 }
 
