@@ -79,14 +79,124 @@ ArbreB& ArbreB::ajouter(Sommet& s) {
 	return *this;
 }
 
+ArbreB* ArbreB::min(ArbreB* A) {
+	ArbreB* tmp = A;
+	ArbreB* min = nullptr;
+
+	while(A) {
+		min = A;
+		A = A->gauche;
+	}
+
+	return min;
+}
+
+ArbreB* ArbreB::max(ArbreB* A) {
+	ArbreB* tmp = A;
+	ArbreB* max = nullptr;
+
+	while(A) {
+		max = A;
+		A = A->droite;
+	}
+
+	return max;
+}
 
 ArbreB& ArbreB::supprimer(Sommet& s) {
 	cout << "dans le supprimer sommet" << endl;
+
+	if(racine.getChar() == 0) {
+		cout << "suppression impossible l'arbre est vide" << endl;
+		return *this;
+	}
+
+	ArbreB* tmp = this;
+
+	//recherche du sommet dans l'arbre
+	while(tmp) {
+		if(s == tmp->racine) {
+			break;
+		}
+		else {
+			if(s < tmp->racine) {
+				tmp = tmp->gauche;
+			}
+			else {
+				tmp = tmp->droite;
+			}
+		}
+	}
+
+	//si le sommet à supprimmer n'existe pas dans l'arbre
+	if(tmp == nullptr) {
+		cout << "l'element à supprimer n'existe pas" << endl;
+		return *this;
+	}
+
+	//si le sommet à supprimmer se trouve à gauche
+	if(tmp->racine < tmp->precedent->racine) {
+		//si le sommet à supprimmer est une feuille
+		if(tmp->gauche == nullptr && tmp->droite == nullptr) {
+			tmp->precedent->gauche = nullptr;
+			tmp->precedent = nullptr;
+			return *this;
+		}//si le sommet à supprimmer a 1 fils à gauche
+		if(tmp->gauche != nullptr && tmp->droite == nullptr) {
+			tmp->precedent->gauche = tmp->gauche;
+			tmp->gauche->precedent = tmp->precedent;
+			tmp->precedent = nullptr;
+			return *this;
+		}//si le sommet à supprimmer a 1 fils à droite
+		if(tmp->gauche == nullptr && tmp->droite != nullptr) {
+			tmp->precedent->gauche = tmp->droite;
+			tmp->droite->precedent = tmp->precedent;
+			tmp->precedent = nullptr;
+			return *this;
+		}//si le sommet à supprimer a 2 fils
+		if(tmp->gauche != nullptr && tmp->droite != nullptr) {
+			ArbreB* Abr_max = max(tmp->gauche);
+			tmp->precedent->gauche = Abr_max;
+			Abr_max->precedent->droite = nullptr;
+			Abr_max->precedent = tmp->precedent;
+			tmp->precedent = nullptr;
+			return *this;
+		}
+	}
+	else {	//si le sommet à supprimer se trouve à droite
+		//si le sommet à supprimer est une feuille
+		if(tmp->gauche == nullptr && tmp->droite == nullptr) {
+			tmp->precedent->droite = nullptr;
+			tmp->precedent = nullptr;
+			return *this;
+		}//si le sommet à supprimer a 1 fils à gauche
+		if(tmp->gauche != nullptr && tmp->droite == nullptr) {
+			tmp->precedent->droite = tmp->gauche;
+			tmp->gauche->precedent = tmp->precedent;
+			tmp->precedent = nullptr;
+			return *this;
+		}//si le sommet à supprimer a 1 fils à droite
+		if(tmp->gauche == nullptr && tmp->droite != nullptr) {
+			tmp->precedent->droite = tmp->droite;
+			tmp->droite->precedent = tmp->precedent;
+			tmp->precedent = nullptr;
+			return *this;
+		}//si le sommet à supprimer a 2 fils
+		if(tmp->gauche != nullptr && tmp->droite != nullptr) {
+			ArbreB* Abr_max = max(tmp->droite);
+			tmp->precedent->droite = Abr_max;
+			Abr_max->precedent->droite = nullptr;
+			Abr_max->precedent = tmp->precedent;
+			tmp->precedent = nullptr;
+			return *this;
+		}
+	}
 
 	return *this;
 }
 
 Sommet& ArbreB::rechercher(Sommet& s) {
+	cout << "dans le rechercher sommet" << endl;
 
 	ArbreB* tmp = this;
 
@@ -106,14 +216,12 @@ Sommet& ArbreB::rechercher(Sommet& s) {
 
 	cout << "le sommet n'existe pas dans l'arbre" << endl;
 
-	s.setChar('\0');
-	s.setFreq(0);
-
 	return s;
 }
 
 ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
-
+	cout << "dans le modifier sommet" << endl;
+	
 	ArbreB* tmp = this;
 
 	while(tmp) {
@@ -137,16 +245,22 @@ ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
 	return *this;
 }
 
+/*
 ArbreB& ArbreB::fusionner(ArbreB& A) {
 	return *this;
 }
+*/
 
+/*
 ArbreB& ArbreB::decomposer() {
 	return *this;
 }
+*/
 
 // affichage infixe (gauche->racine->droite)
 void ArbreB::afficher(ArbreB* A) {
+
+	if(A == nullptr) return;
 
 	if(racine.getChar() == 0) {
 		cout << "l'arbre est vide" << endl;
@@ -162,20 +276,58 @@ void ArbreB::afficher(ArbreB* A) {
 	cout << endl;
 }
 
-/*ostream& operator<<(ostream& flux, ArbreB* A) {
+bool ArbreB::egalite(ArbreB* current, ArbreB* A) {
+
+	if(current == nullptr || A == nullptr) return false;
+
+	if(current->racine == A->racine) {
+		return true;
+	}
+	
+	return egalite(current->gauche, A->gauche) && egalite(current->droite, A->droite);
+}
+
+bool ArbreB::operator ==(ArbreB* A) {
+
+	ArbreB* tmp = this;
+
+	cout << "fonction egale : " << egalite(tmp, A) << endl; 
+	
+	return egalite(tmp, A);
+}
+
+/*
+ostream& operator<<(ostream& flux, ArbreB* A) {
 	return flux;
-}*/
+}
+*/
 
-/*void ArbreB::supprimerArbre(ArbreB* A) {
-	cout << "dans le supprimer arbre" << endl;
+int ArbreB::hauteur(ArbreB* A, int hg, int hd) {
 
-	if(A->droite != nullptr) {
-		supprimerArbre(A->droite);
+	if(racine.getChar() == 0 || A == nullptr) {
+		return 0;
 	}
 
-	if(A->gauche != nullptr) {
-		supprimerArbre(A->gauche);
+	hg = hauteur(A->gauche, hg, hd);
+	hd = hauteur(A->droite, hg, hd);
+
+	if(hg > hd) {
+		return 1 + hg;
+	}
+	else {
+		return 1 + hd;
 	}
 
-	delete A;
-}*/
+	cout << "erreur dans la hauteur de l'arbre" << endl;
+
+	return -1;
+}
+
+int ArbreB::nombre_element(ArbreB* A) {
+
+	if(racine.getChar() == 0 || A == nullptr) {
+		return 0;
+	}
+
+	return 1 + nombre_element(A->gauche) + nombre_element(A->droite);
+}
