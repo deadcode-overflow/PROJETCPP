@@ -66,10 +66,39 @@ int main() {
     //test rechecher un sommet dans l'arbre
     Sommet sommetArbre = A.rechercher(s5);
     cout << "recherche du sommet s5 dans l'arbre" << endl;
-    cout << " sommet de l'arbre -> " << sommetArbre << endl;
+    cout << "sommet de l'arbre -> " << sommetArbre << endl;
     //test modifier un sommmet dans l'arbre
     A.modifier(s6, 'K', 6);
     cout << "modification du sommet s6 dans l'arbre par 'K' '6'" << endl;
+    cout << "s6 -> " << s6 << endl;
+    A.afficher(&A);
+    //test hauteur de l'arbre
+    cout << "hauteur de l'arbre A : " << A.hauteur(&A,0,0) << endl;;
+    //test nombre d'élément dans l'arbre
+    cout << "nombre d'element dans l'arbre A : " << A.nombre_element(&A) << endl;
+    cout << endl;
+    //test d'égalité de deux arbres binaires
+    AbrDefaut.ajouter(s);
+    AbrDefaut.ajouter(s2);
+    AbrDefaut.ajouter(s4);
+    AbrDefaut.ajouter(s5);
+    AbrDefaut.ajouter(s6);
+    AbrDefaut.ajouter(s7);
+    AbrDefaut.modifier(s6, 'K',6);
+    A.afficher(&A);
+    AbrDefaut.afficher(&AbrDefaut);
+    cout << "comparaison entre l'arbre A et l'arbre par défaut (identique à A)" << endl;
+    if(&A == &AbrDefaut) {
+    	cout << "A et AbrDefaut sont égaux" << endl;
+    }
+    else {
+    	cout << "A et AbrDefaut ne sont pas égaux" << endl;
+    }
+    cout << endl;
+    //test de suppression d'un sommet dans l'arbre
+    A.supprimer(s5);
+    cout << "s5 -> " << s5;
+    cout << "suppression du sommet s5 dans l'arbre A" << endl;
     A.afficher(&A);
     //-------------------------------------------------
 
