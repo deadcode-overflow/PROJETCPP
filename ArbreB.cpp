@@ -22,6 +22,13 @@ ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauch
 
 ArbreB::~ArbreB() {
 	cout << "destructeur ArbreB" << endl;
+	if(droite) {
+		delete droite;
+	}
+	if (gauche)
+	{
+		delete gauche;
+	}
 }
 
 Sommet& ArbreB::getSommet() {
@@ -139,19 +146,37 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 		//si le sommet à supprimmer est une feuille
 		if(tmp->gauche == nullptr && tmp->droite == nullptr) {
 			tmp->precedent->gauche = nullptr;
+
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+			
+			delete tmp;
+			
 			return *this;
 		}//si le sommet à supprimmer a 1 fils à gauche
 		if(tmp->gauche != nullptr && tmp->droite == nullptr) {
 			tmp->precedent->gauche = tmp->gauche;
 			tmp->gauche->precedent = tmp->precedent;
+
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+			
+			delete tmp;
+			
 			return *this;
 		}//si le sommet à supprimmer a 1 fils à droite
 		if(tmp->gauche == nullptr && tmp->droite != nullptr) {
 			tmp->precedent->gauche = tmp->droite;
 			tmp->droite->precedent = tmp->precedent;
+
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+			
+			delete tmp;
+			
 			return *this;
 		}//si le sommet à supprimer a 2 fils
 		if(tmp->gauche != nullptr && tmp->droite != nullptr) {
@@ -159,7 +184,13 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 			tmp->precedent->gauche = Abr_max;
 			Abr_max->precedent->droite = nullptr;
 			Abr_max->precedent = tmp->precedent;
+
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+			
+			delete tmp;
+			
 			return *this;
 		}
 	}
@@ -167,19 +198,37 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 		//si le sommet à supprimer est une feuille
 		if(tmp->gauche == nullptr && tmp->droite == nullptr) {
 			tmp->precedent->droite = nullptr;
+			
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+			
+			delete tmp;
+			
 			return *this;
 		}//si le sommet à supprimer a 1 fils à gauche
 		if(tmp->gauche != nullptr && tmp->droite == nullptr) {
 			tmp->precedent->droite = tmp->gauche;
 			tmp->gauche->precedent = tmp->precedent;
+			
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+
+			delete tmp;
+			
 			return *this;
 		}//si le sommet à supprimer a 1 fils à droite
 		if(tmp->gauche == nullptr && tmp->droite != nullptr) {
 			tmp->precedent->droite = tmp->droite;
 			tmp->droite->precedent = tmp->precedent;
+			
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+
+			delete tmp;
+			
 			return *this;
 		}//si le sommet à supprimer a 2 fils
 		if(tmp->gauche != nullptr && tmp->droite != nullptr) {
@@ -187,7 +236,13 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 			tmp->precedent->droite = Abr_max;
 			Abr_max->precedent->droite = nullptr;
 			Abr_max->precedent = tmp->precedent;
+			
 			tmp->precedent = nullptr;
+			tmp->droite = nullptr;
+			tmp->gauche = nullptr;
+			
+			delete tmp;
+			
 			return *this;
 		}
 	}
@@ -221,7 +276,7 @@ Sommet& ArbreB::rechercher(Sommet& s) {
 
 ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
 	cout << "dans le modifier sommet" << endl;
-	
+
 	ArbreB* tmp = this;
 
 	while(tmp) {
