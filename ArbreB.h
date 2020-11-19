@@ -30,7 +30,7 @@ class ArbreB : public Sommet
 		ArbreB& supprimer(Sommet& s); //fait
 		Sommet& rechercher(Sommet& s); //fait
 		ArbreB& modifier(Sommet& s, char c, int f); //fait
-		ArbreB& fusionner(ArbreB* A); //a faire
+		ArbreB& fusionner(ArbreB* A); //faire
 		ArbreB& decomposer(); //a faire
 		void afficher(ArbreB* A); //fait - (sert pour << ?)
 
