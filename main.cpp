@@ -155,6 +155,8 @@ int main() {
     N.ajouter(s8);
     N.ajouter(s17);
     N.print_t(0,0,&N);
+
+    ArbreB N_copie(&N);
     //test fusionner deux arbres binaires
     A.ajouter(s23);
 	A.ajouter(s11);
@@ -170,8 +172,21 @@ int main() {
     cout << "Arbre N avant fusion" << endl;
     N.print_t(0,0,&N);
     N.fusionner(&A);
-    cout << "Arbre N après fusion" << endl;
+
+    //test constructeur arbre copie
+    cout << "arbre N_copie " << endl;
+    N_copie.print_t(0,0,&N_copie);
+
     N.print_t(0,0,&N);
+    //test decomposition
+    ArbreB AbrDroit, AbrGauche;
+    N.decomposer(&AbrGauche, &AbrDroit, &N);
+    cout << "AbrGauche de N fusion" << endl;
+    cout << AbrGauche.getSommet();
+    AbrGauche.print_t(0,0,&AbrGauche);
+    cout << "AbrDroit de N fusion" << endl;
+    cout << AbrDroit.getSommet();
+    AbrDroit.print_t(0,0,&AbrDroit);
     //-------------------------------------------------
 
     return 0;
