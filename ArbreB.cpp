@@ -16,9 +16,37 @@ ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauch
 	cout << "dans le constructeur arbre(sommet, precedent)" << endl;
 }
 
-/*ArbreB::ArbreB(ArbreB& A) {
+void ArbreB::copier(ArbreB* copie, ArbreB* A) {
+	cout << "dans le copier" << endl;
+	if(!A) return;
+
+cout << copie->getSommet() << endl;
+
+	copie->racine = A->racine;
+	
+	if(A->gauche) {
+		
+		copie->gauche = new ArbreB(A->gauche->racine);
+		cout << "non là" << endl;
+	}
+	if (A->droite) {
+
+		copie->droite = new ArbreB(A->droite->racine);
+		cout << "Tinhinane" << endl;
+	}
+
+	copie->precedent = new ArbreB(A->precedent->racine);
+
+	copier(copie->gauche, A->gauche);
+	copier(copie->droite, A->droite);
+}
+
+ArbreB::ArbreB(ArbreB* A) {
 	cout << "dans le constructeur arbre par copie" << endl;
-}*/
+
+	ArbreB* tmp = this;
+	copier(tmp, A);
+}
 
 ArbreB::~ArbreB() {
 	cout << "destructeur ArbreB" << endl;
@@ -344,11 +372,50 @@ ArbreB& ArbreB::fusionner(ArbreB* A) {
 	return *this;
 }
 
-/*
-ArbreB& ArbreB::decomposer() {
-	return *this;
+void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
+
+	if(!A || A->getSommet().getChar() == 0) {
+		return;
+	}
+
+	if(A->racine == racine) {
+		ajouterGauche(Ag, A->gauche);
+		return;
+	}
+
+	Ag->ajouter(A->racine);
+
+	ajouterGauche(Ag, A->gauche);
+	ajouterGauche(Ag, A->droite);
 }
-*/
+
+void ArbreB::ajouterDroite(ArbreB* Ad, ArbreB* A) {
+
+	if(!A || A->getSommet().getChar() == 0) {
+		return;
+	}
+
+	if(A->racine == racine) {
+		ajouterDroite(Ad, A->droite);
+		return;
+	}
+
+	Ad->ajouter(A->racine);
+
+	ajouterDroite(Ad, A->gauche);
+	ajouterDroite(Ad, A->droite);
+}
+
+void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
+
+	if(!A) {
+		return;
+	}
+
+	Ag->ajouterGauche(Ag, A->gauche);
+	Ad->ajouterDroite(Ad, A->droite);
+}
+
 
 
 void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
@@ -416,6 +483,11 @@ bool ArbreB::operator ==(ArbreB* A) {
 	bool res = egalite(tmp, A);
 
 	return res;
+}
+
+ArbreB& ArbreB::operator =(ArbreB* A) {
+
+	return *this;
 }
 
 /*
