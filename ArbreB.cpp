@@ -181,9 +181,24 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 		}//si le sommet à supprimer a 2 fils
 		if(tmp->gauche != nullptr && tmp->droite != nullptr) {
 			ArbreB* Abr_max = max(tmp->gauche);
+			
 			tmp->precedent->gauche = Abr_max;
-			Abr_max->precedent->droite = nullptr;
+			
+			if(Abr_max->gauche) {
+				Abr_max->precedent->droite = Abr_max->gauche;
+				Abr_max->gauche->precedent = Abr_max->precedent;
+			}
+			else {
+				Abr_max->precedent->droite = nullptr;
+			}
 			Abr_max->precedent = tmp->precedent;
+
+			
+			tmp->droite->precedent = Abr_max;
+			tmp->gauche->precedent = Abr_max;
+			
+			Abr_max->droite = tmp->droite;
+			Abr_max->gauche = tmp->gauche;
 
 			tmp->precedent = nullptr;
 			tmp->droite = nullptr;
@@ -202,7 +217,7 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 			tmp->precedent = nullptr;
 			tmp->droite = nullptr;
 			tmp->gauche = nullptr;
-			
+
 			delete tmp;
 			
 			return *this;
@@ -233,14 +248,28 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 		}//si le sommet à supprimer a 2 fils
 		if(tmp->gauche != nullptr && tmp->droite != nullptr) {
 			ArbreB* Abr_max = max(tmp->droite);
+			
 			tmp->precedent->droite = Abr_max;
-			Abr_max->precedent->droite = nullptr;
+			
+			if(Abr_max->gauche) {
+				Abr_max->precedent->droite = Abr_max->gauche;
+				Abr_max->gauche = Abr_max->precedent;
+			}
+			else {
+				Abr_max->precedent->droite = nullptr;
+			}
 			Abr_max->precedent = tmp->precedent;
+			
+			tmp->droite->precedent = Abr_max;
+			tmp->gauche->precedent = Abr_max;
+			
+			Abr_max->droite = tmp->droite;
+			Abr_max->gauche = tmp->gauche;
 			
 			tmp->precedent = nullptr;
 			tmp->droite = nullptr;
 			tmp->gauche = nullptr;
-			
+
 			delete tmp;
 			
 			return *this;
@@ -300,17 +329,53 @@ ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
 	return *this;
 }
 
-/*
-ArbreB& ArbreB::fusionner(ArbreB& A) {
+
+ArbreB& ArbreB::fusionner(ArbreB* A) {
+
+	if(!A || racine.getChar() == 0 || A->racine.getChar() == 0) {
+		return *this;
+	}
+
+	ajouter(A->racine);
+
+	fusionner(A->gauche);
+	fusionner(A->droite);
+
 	return *this;
 }
-*/
 
 /*
 ArbreB& ArbreB::decomposer() {
 	return *this;
 }
 */
+
+
+void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
+    if (A == nullptr)  {
+    	return;
+    }
+    else {
+    	int i;
+        for (i = 1; i < hauteur; i++) {
+        	cout << "│ ";
+        }
+        if (hauteur)    {
+            if (cote == 0) {
+                cout << "├─ " << A->getSommet().getChar() << endl;
+            }
+            else {
+                cout << "└─ " << A->getSommet().getChar() << endl;
+            }
+        }
+        else {
+            cout << A->getSommet().getChar() << endl;
+        }
+    }
+
+    print_t (hauteur + 1, 0, A->getGauche());
+    print_t (hauteur + 1, 1, A->getDroite());
+}
 
 // affichage infixe (gauche->racine->droite)
 void ArbreB::afficher(ArbreB* A) {
@@ -336,19 +401,21 @@ bool ArbreB::egalite(ArbreB* current, ArbreB* A) {
 	if(current == nullptr || A == nullptr) return false;
 
 	if(current->racine == A->racine) {
+		egalite(current->gauche, A->gauche);
+		egalite(current->droite, A->droite);
 		return true;
 	}
 	
-	return egalite(current->gauche, A->gauche) && egalite(current->droite, A->droite);
+	return false;
 }
 
 bool ArbreB::operator ==(ArbreB* A) {
 
 	ArbreB* tmp = this;
 
-	cout << "fonction egale : " << egalite(tmp, A) << endl; 
-	
-	return egalite(tmp, A);
+	bool res = egalite(tmp, A);
+
+	return res;
 }
 
 /*
