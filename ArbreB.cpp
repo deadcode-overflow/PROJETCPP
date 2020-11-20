@@ -4,35 +4,55 @@
 
 using namespace std;
 
-ArbreB::ArbreB() : racine(), precedent(0), droite(0), gauche(0) {
-	cout << "dans le constructeur arbre par defaut" << endl;
-}
+/**
+ * usage : constructeur par defaut
+ * 
+ * description :
+ * 		initialise la @racine de l'objet courant avec le constructeur par defaut de l'objet de type Sommet
+ *		initialise @precedant, @droite et @gauche à null.
+*/
+ArbreB::ArbreB() : racine(), precedent(0), droite(0), gauche(0) {}
 
-ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {
-	cout << "dans le constructeur arbre(sommet)" << endl;
-}
+/**
+ * usage : constructeur par référence
+ * entrée : une référence @s d'un objet de type Sommet
+ *
+ * description :
+ * 		initialise la @racine de l'objet courant avec le constructeur par référence de l'objet de type Sommet, prenant en paramètre @s
+ *		initialise @precedant avec l'objet courant
+ * 		initialise @droite et @gauche à null.
+*/
+ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {}
 
-ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauche(0) {
-	cout << "dans le constructeur arbre(sommet, precedent)" << endl;
-}
+/**
+ * usage : constructeur par référence
+ * entrée : une référence @s d'un objet de type Sommet et un pointeur @A sur un objet de type ArbreB
+ *
+ * description :
+ * 		initialise la @racine de l'objet courant avec le constructeur par référence de l'objet de type Sommet, prenant en paramètre @s
+ *		initialise @precedant avec @A
+ * 		initialise @droite et @gauche à null.
+*/
+ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauche(0) {}
 
+/**
+ * usage : copie d'un arbre binaire
+ * entrée :
+ *		un pointeur @copie sur un objet de type ArbreB qui représente l'arbre dans lequel on copie
+ *		un pointeur @A sur un objet de type ArbreB qui représente l'arbre que l'on copie
+ *
+ * description : copie un arbre binaire dans un autre arbre bianire de manière recursive.		
+*/
 void ArbreB::copier(ArbreB* copie, ArbreB* A) {
-	cout << "dans le copier" << endl;
 	if(!A) return;
-
-cout << copie->getSommet() << endl;
 
 	copie->racine = A->racine;
 	
 	if(A->gauche) {
-		
 		copie->gauche = new ArbreB(A->gauche->racine);
-		cout << "non là" << endl;
 	}
 	if (A->droite) {
-
 		copie->droite = new ArbreB(A->droite->racine);
-		cout << "Tinhinane" << endl;
 	}
 
 	copie->precedent = new ArbreB(A->precedent->racine);
@@ -41,15 +61,23 @@ cout << copie->getSommet() << endl;
 	copier(copie->droite, A->droite);
 }
 
+/**
+ * usage : constructeur de copie
+ * entrée : un pointeur @A sur un objet de type ArbreB
+ *
+ * description : utilise la fonction copier, pour copier l'objet @A dans l'objet courant
+*/
 ArbreB::ArbreB(ArbreB* A) {
-	cout << "dans le constructeur arbre par copie" << endl;
-
 	ArbreB* tmp = this;
 	copier(tmp, A);
 }
 
+/**
+ * usage : destrcuteur
+ *
+ * description : désalloue le sous arbre gauche et le sous arbre droite d'un arbre binaire
+*/
 ArbreB::~ArbreB() {
-	cout << "destructeur ArbreB" << endl;
 	if(droite) {
 		delete droite;
 	}
@@ -59,24 +87,56 @@ ArbreB::~ArbreB() {
 	}
 }
 
+/**
+ * usage : getter de @racine
+ * retour : @racine de l'arbre courant
+ *
+ * description : permet d'accéder à la racine de l'arbre binaire courant
+*/
 Sommet& ArbreB::getSommet() {
 	return racine;
 }
 
+/**
+ * usage : getter de @droite
+ * retour : @droite de l'arbre courant
+ *
+ * description : permet d'accéder au sous-arbre droit de l'arbre binaire courant
+*/
 ArbreB* ArbreB::getDroite() {
 	return droite;
 }
 
+/**
+ * usage : getter de @gauche
+ * retour : @gauche de l'arbre courant
+ *
+ * description : permet d'accéder au sous-arbre gauche de l'arbre binaire courant
+*/
 ArbreB* ArbreB::getGauche() {
 	return gauche;
 }
 
+/**
+ * usage : getter de @precedent
+ * retour : @precedent de l'arbre courant
+ *
+ * description : permet d'accéder à l'arbre bianire précédant de l'arbre binaire courant
+*/
 ArbreB* ArbreB::getPrecedent() {
 	return precedent;
 }
 
+/**
+ * usage : ajout d'un sommet dans un arbre binaire
+ * entrée : une référence @s du sommet que l'on veut ajouter
+ * retour : l'arbre binaire après ajout ou non du sommet
+ *
+ * description :
+ * 		ajoute un sommet dans un arbre bianire de manière itérative à l'aide une boucle while et un pointeur pour parcourir l'arbre binaire.
+ *		le sommet ajouté, est comparé avec les sommets de l'arbre binaire pour déterminer sa place au sein de l'arbre.
+*/
 ArbreB& ArbreB::ajouter(Sommet& s) {
-	cout << "dans le ajouter sommet" << endl;
 	if(racine.getChar() == 0) {
 		racine = s;
 		droite = nullptr;
@@ -93,29 +153,33 @@ ArbreB& ArbreB::ajouter(Sommet& s) {
 		prec = tmp;
 
 		if(s < tmp->racine) {
-			tmp = tmp->gauche;
-			cout << "--- deplacement à gauche ---" << endl; 
+			tmp = tmp->gauche; 
 		}
 		else {
 			tmp = tmp->droite;
-			cout << "--- déplacement à droite ---" << endl;
 		}
 	}
 
 	if(s < prec->racine) {
 		prec->gauche = new ArbreB(s, prec);
-		cout << "--- creation -- gauche ---" << endl;
 	}
 	else {
 		prec->droite = new ArbreB(s, prec);
-		cout << "--- creation -- droite ---" << endl;
 	}
 
 	return *this;
 }
 
+/**
+ * usage : déterminer le sommet de valeur minimale dans un arbre binaire
+ * entrée : un pointeur vers l'arbre bianire dans lequel on veut obtenir la valeur minimale
+ * retour : un arbre binaire qui contient la racine avec la valeur minimale
+ *
+ * description :
+ * 		détermine la valeur minimale d'un arbre de manière itérative à l'aide d'un boucle while et d'un pointeur qui parcours l'arbre binaire.
+ * 		on se déplace toujours à gauche dans l'arbre jusqu'à arriver vers une feuille, car les valeurs minimales sont toujours à gauches.
+*/
 ArbreB* ArbreB::min(ArbreB* A) {
-	ArbreB* tmp = A;
 	ArbreB* min = nullptr;
 
 	while(A) {
@@ -126,8 +190,16 @@ ArbreB* ArbreB::min(ArbreB* A) {
 	return min;
 }
 
+/**
+ * usage : déterminer le sommet de valeur maximale dans un arbre binaire
+ * entrée : un pointeur vers l'arbre bianire dans lequel on veut obtenir la valeur maximale
+ * retour : un arbre binaire qui contient la racine avec la valeur maximale
+ * 
+ * description :
+ * 		détermine la valeur maximale d'un arbre de manière itérative à l'aide d'un boucle while et d'un pointeur qui parcours l'arbre binaire.
+ * 		on se déplace toujours à droite dans l'arbre jusqu'à arriver vers une feuille, car les valeurs maximales sont toujours à droite.
+*/
 ArbreB* ArbreB::max(ArbreB* A) {
-	ArbreB* tmp = A;
 	ArbreB* max = nullptr;
 
 	while(A) {
@@ -138,9 +210,17 @@ ArbreB* ArbreB::max(ArbreB* A) {
 	return max;
 }
 
+/**
+ * usage : supprimer un sommet dans un arbre binaire
+ * entrée : une référence du sommet @s que l'on veut supprimer dan l'abre courant.
+ * retour : l'arbre binaire après suppression ou non du sommet
+ * 
+ * description :
+ * 		on determine la position du sommet @s dans l'arbre binaire à l'aide d'une boucle while et d'un pointeur.
+ *		suivant le cas où le sommet que l'on veut supprimer à 0, 1 ou 2 sous-arbres, on supprime ce sommet.
+ *		dans le cas où le sommet que l'on veut supprer à deux sous-arbre, on utilise les fonctions max ou min.
+*/
 ArbreB& ArbreB::supprimer(Sommet& s) {
-	cout << "dans le supprimer sommet" << endl;
-
 	if(racine.getChar() == 0) {
 		cout << "suppression impossible l'arbre est vide" << endl;
 		return *this;
@@ -307,9 +387,14 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
 	return *this;
 }
 
+/**
+ * usage : rechercher un sommet dans un arbre binaire 
+ * entrée : une référence @s du sommet à rechercher 
+ * retour : le sommet trouvé dans l'arbre 
+ *
+ * description : effectue un parcours d'arbre à l'aide d'un pointeur et une fois le sommet trouvé on le renvoie .
+*/
 Sommet& ArbreB::rechercher(Sommet& s) {
-	cout << "dans le rechercher sommet" << endl;
-
 	ArbreB* tmp = this;
 
 	while(tmp) {
@@ -331,9 +416,16 @@ Sommet& ArbreB::rechercher(Sommet& s) {
 	return s;
 }
 
+/**
+ * usage : modification des valeurs @lettre et @freq d'un sommet d'un arbre binaire
+ * entrée : une référence du sommet à modifier, les valeurs nouvelles de @lettre et @freq de @s
+ * retour : l'arbre binaire avec le sommet modifié
+ *
+ * description :
+ * 		la méthode parcourt l'arbre à l'aide d'un pointeur et cherche le sommet donné en paramètres.
+ * 		une fois trouvé elle modifie les valeurs de ses attributs à l'aide des méthodes SetChar() et SetFreq()
+*/
 ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
-	cout << "dans le modifier sommet" << endl;
-
 	ArbreB* tmp = this;
 
 	while(tmp) {
@@ -357,9 +449,14 @@ ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
 	return *this;
 }
 
-
+/**
+ * usage : fusionner deux arbres binaires
+ * entrée : l'arbre binaire avec lequel on veut fusionner l'arbre courant
+ * retour : nouvel arbre qui est la fusion de l'arbre à fusionner donné en paramètres avec l'arbre qui a appelé la méthode 
+ *
+ * description
+*/
 ArbreB& ArbreB::fusionner(ArbreB* A) {
-
 	if(!A || racine.getChar() == 0 || A->racine.getChar() == 0) {
 		return *this;
 	}
@@ -372,8 +469,14 @@ ArbreB& ArbreB::fusionner(ArbreB* A) {
 	return *this;
 }
 
+/**
+ * usage :
+ * entrée :
+ * retour :
+ *
+ * description :
+*/
 void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
-
 	if(!A || A->getSommet().getChar() == 0) {
 		return;
 	}
@@ -389,8 +492,13 @@ void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
 	ajouterGauche(Ag, A->droite);
 }
 
+/**
+ *
+ *
+ *
+ *
+*/
 void ArbreB::ajouterDroite(ArbreB* Ad, ArbreB* A) {
-
 	if(!A || A->getSommet().getChar() == 0) {
 		return;
 	}
@@ -406,8 +514,13 @@ void ArbreB::ajouterDroite(ArbreB* Ad, ArbreB* A) {
 	ajouterDroite(Ad, A->droite);
 }
 
+/**
+ *
+ *
+ *
+ *
+*/
 void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
-
 	if(!A) {
 		return;
 	}
@@ -416,8 +529,12 @@ void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
 	Ad->ajouterDroite(Ad, A->droite);
 }
 
-
-
+/**
+ *
+ *
+ *
+ *
+*/
 void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
     if (A == nullptr)  {
     	return;
@@ -444,9 +561,14 @@ void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
     print_t (hauteur + 1, 1, A->getDroite());
 }
 
+/**
+ *
+ *
+ *
+ *
+*/
 // affichage infixe (gauche->racine->droite)
 void ArbreB::afficher(ArbreB* A) {
-
 	if(A == nullptr) return;
 
 	if(racine.getChar() == 0) {
@@ -463,39 +585,12 @@ void ArbreB::afficher(ArbreB* A) {
 	cout << endl;
 }
 
-bool ArbreB::egalite(ArbreB* current, ArbreB* A) {
-
-	if(current == nullptr || A == nullptr) return false;
-
-	if(current->racine == A->racine) {
-		egalite(current->gauche, A->gauche);
-		egalite(current->droite, A->droite);
-		return true;
-	}
-	
-	return false;
-}
-
-bool ArbreB::operator ==(ArbreB* A) {
-
-	ArbreB* tmp = this;
-
-	bool res = egalite(tmp, A);
-
-	return res;
-}
-
-ArbreB& ArbreB::operator =(ArbreB* A) {
-
-	return *this;
-}
-
-/*
-ostream& operator<<(ostream& flux, ArbreB* A) {
-	return flux;
-}
+/**
+ *
+ *
+ *
+ *
 */
-
 int ArbreB::hauteur(ArbreB* A, int hg, int hd) {
 
 	if(racine.getChar() == 0 || A == nullptr) {
@@ -517,6 +612,12 @@ int ArbreB::hauteur(ArbreB* A, int hg, int hd) {
 	return -1;
 }
 
+/**
+ *
+ *
+ *
+ *
+*/
 int ArbreB::nombre_element(ArbreB* A) {
 
 	if(racine.getChar() == 0 || A == nullptr) {

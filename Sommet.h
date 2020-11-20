@@ -16,15 +16,18 @@ class Sommet {
 		Sommet(char Slettre, int Sfreq);
 		~Sommet();
 
+		// Gettres
 		int getFreq();
 		char getChar();
+		// Setters
 		void setFreq(int i);
 		void setChar(char c);
 
+		// Surchages d'opérateurs
 		bool operator ==(Sommet& s); // s1 == s2
 		bool operator <(Sommet& s); // s1 < s2
 		bool operator >(Sommet& s); // s1 > s2
-		Sommet& operator=(Sommet& s); //s1 = s2
+		Sommet& operator =(Sommet& s); //s1 = s2
 		friend ostream& operator<<(ostream& flux, Sommet& s); // cout << s
 		friend ostream& operator<<(ostream& flux, Sommet* s); // cout << *s
 };
