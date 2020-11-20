@@ -11,9 +11,11 @@ class Sommet {
 		int freq;
 		char lettre;
 	public :
+		// Constructeurs
 		Sommet();
 		Sommet(Sommet& s);
 		Sommet(char Slettre, int Sfreq);
+		// Destructeur
 		~Sommet();
 
 		// Gettres

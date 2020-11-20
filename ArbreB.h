@@ -15,10 +15,12 @@ class ArbreB : public Sommet
 		ArbreB* gauche;
 		ArbreB* precedent;
 	public :
+		// Constructeurs
 		ArbreB();
 		ArbreB(Sommet& s);
 		ArbreB(Sommet& s, ArbreB* A);
 		ArbreB(ArbreB* A); //constructeur par copie
+		// Destructeur
 		~ArbreB();
 
 		// Getters

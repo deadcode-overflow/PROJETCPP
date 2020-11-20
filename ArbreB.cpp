@@ -452,9 +452,9 @@ ArbreB& ArbreB::modifier(Sommet& s, char c, int f) {
 /**
  * usage : fusionner deux arbres binaires
  * entrée : l'arbre binaire avec lequel on veut fusionner l'arbre courant
- * retour : nouvel arbre qui est la fusion de l'arbre à fusionner donné en paramètres avec l'arbre qui a appelé la méthode 
+ * retour : nouvel arbre qui est la fusion de l'arbre à fusionner donné en paramètre avec l'arbre courant
  *
- * description
+ * description : ajoute les sommets de l'arbre en paramètre dans l'arbre courant de manière récursive
 */
 ArbreB& ArbreB::fusionner(ArbreB* A) {
 	if(!A || racine.getChar() == 0 || A->racine.getChar() == 0) {
@@ -470,11 +470,10 @@ ArbreB& ArbreB::fusionner(ArbreB* A) {
 }
 
 /**
- * usage :
- * entrée :
- * retour :
+ * usage : récupérer le sous-arbre gauche d'un arbre bianire
+ * entrée : l'arbre binaire @Ag qui récupere le sous-arbre gauche et l'arbre bianire @A dans lequel on veut récupérer son sous-arbre gauche
  *
- * description :
+ * description : ajout de manière récursive le sous-arbre gauche de l'arbe binaire passé en paramètre
 */
 void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
 	if(!A || A->getSommet().getChar() == 0) {
@@ -493,10 +492,10 @@ void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
 }
 
 /**
+ * usage : récupérer le sous-arbre droit d'un arbre bianire
+ * entrée : l'arbre binaire @Ad qui récupere le sous-arbre droit et l'arbre bianire @A dans lequel on veut récupérer son sous-arbre droit
  *
- *
- *
- *
+ * description : ajout de manière récursive le sous-arbre droit de l'arbe binaire passé en paramètre
 */
 void ArbreB::ajouterDroite(ArbreB* Ad, ArbreB* A) {
 	if(!A || A->getSommet().getChar() == 0) {
@@ -515,10 +514,13 @@ void ArbreB::ajouterDroite(ArbreB* Ad, ArbreB* A) {
 }
 
 /**
+ * usage : décomposer un arbre bianire en deux sous-arbres
+ * entrée :
+ * 		l'arbre binaire @Ag qui récuperer le sous-arbre gauche,
+ * 		l'arbre binaire @Ad qui récupere le sous-arbre droit,
+ * 		l'arbre bianire @A dans lequel on veut récupérer son sous-arbre gauche et son sous-arbre droit
  *
- *
- *
- *
+ * description : utilisation des fonction ajouterGauche et ajouterDroite pour récupérer respectivement le sous-arbre gauche et le sous-arbre droit de l'arbre @A
 */
 void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
 	if(!A) {
@@ -530,10 +532,13 @@ void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
 }
 
 /**
+ * usage : afficher l'arbre courant dans la sortie standard
+ * entrée :
+ * 		la hauteur de l'arbre que l'on veut afficher
+ * 		un entier pour déterminer de quel côté on se trouve dan l'arbre
+ *		un pointeur sur l'arbre que l'on afficher
  *
- *
- *
- *
+ * description : affiche de manière recursive l'arbre binaire en incrémentant la hauteur de 1
 */
 void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
     if (A == nullptr)  {
@@ -562,12 +567,11 @@ void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
 }
 
 /**
+ * usage : afficher l'arbre courant dans la sortie standard avec le sommet courant et son précédent
+ * entrée : un pointeur sur l'arbre que l'on veut afficher
  *
- *
- *
- *
+ * description : affiche de manière recursive l'arbre en parcours infixe
 */
-// affichage infixe (gauche->racine->droite)
 void ArbreB::afficher(ArbreB* A) {
 	if(A == nullptr) return;
 
@@ -586,10 +590,13 @@ void ArbreB::afficher(ArbreB* A) {
 }
 
 /**
- *
- *
- *
- *
+ * usage : déterminer la hauteur d'un arbre binaire
+ * entrée : un pointeur sur l'abre binaire, et une hauteur pour le sous-arbre droit et une hauteur pour le sous-arbre gauche
+ * retour : la hauteur de l'abre binaire
+ * 
+ * description :
+ * 		determine la hauteur de manière récursive en comparant la hauteur du sous-arbre droit et du sous-arbre gauche
+ *		on retour la hauteur maximal entre le sous-arbre droit et le sous-arbre gauche
 */
 int ArbreB::hauteur(ArbreB* A, int hg, int hd) {
 
@@ -613,10 +620,11 @@ int ArbreB::hauteur(ArbreB* A, int hg, int hd) {
 }
 
 /**
+ * usage : déterminer le nombre de sommet dans un arbre binaire
+ * entrée : un pointeur sur l'arbre binaire dont on veut déterminer le nombre de sommet
+ * retour : le nombre de sommet dans l'abre bianire
  *
- *
- *
- *
+ * description : on determine le nombre de sommet de manière recursive en incrémentant de 1 à chaque fois que l'on passe d'un sommet de l'arbre à un autre.
 */
 int ArbreB::nombre_element(ArbreB* A) {
 

@@ -87,14 +87,6 @@ int main() {
     AbrDefaut.modifier(s6, 'K', 6);
     A.afficher(&A);
     AbrDefaut.afficher(&AbrDefaut);
-    cout << "comparaison entre l'arbre A et l'arbre par défaut (identique à A)" << endl;
-    if(&A == &AbrDefaut) {
-    	cout << "A et AbrDefaut sont égaux" << endl;
-    }
-    else {
-    	cout << "A et AbrDefaut ne sont pas égaux" << endl;
-    }
-    cout << endl;
     //test de suppression d'un sommet dans l'arbre
     A.supprimer(s5);
     cout << "s5 -> " << s5;
