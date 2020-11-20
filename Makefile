@@ -8,7 +8,7 @@ else
 	LDFLAGS= -Wall -Wextra -O2
 endif
 EXEC= main
-SRC= main.cpp Sommet.cpp ArbreB.cpp
+SRC= main.cpp Sommet.cpp ArbreB.cpp test.cpp
 OBJ= $(SRC:.cpp=.o)
 
 
@@ -28,6 +28,8 @@ main.o : Sommet.h
 Sommet.o : Sommet.h
 
 ArbreB.o : ArbreB.h
+
+test.o : test.h
 
 %.o : %.cpp
 	$(CXX) -c $< $(CXXFLAGS)

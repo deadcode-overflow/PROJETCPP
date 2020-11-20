@@ -36,6 +36,21 @@ ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {}
 ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauche(0) {}
 
 /**
+ * usage : destrcuteur
+ *
+ * description : désalloue le sous arbre gauche et le sous arbre droite d'un arbre binaire
+*/
+ArbreB::~ArbreB() {
+	if(droite) {
+		delete droite;
+	}
+	if (gauche)
+	{
+		delete gauche;
+	}
+}
+
+/**
  * usage : copie d'un arbre binaire
  * entrée :
  *		un pointeur @copie sur un objet de type ArbreB qui représente l'arbre dans lequel on copie
@@ -70,21 +85,6 @@ void ArbreB::copier(ArbreB* copie, ArbreB* A) {
 ArbreB::ArbreB(ArbreB* A) {
 	ArbreB* tmp = this;
 	copier(tmp, A);
-}
-
-/**
- * usage : destrcuteur
- *
- * description : désalloue le sous arbre gauche et le sous arbre droite d'un arbre binaire
-*/
-ArbreB::~ArbreB() {
-	if(droite) {
-		delete droite;
-	}
-	if (gauche)
-	{
-		delete gauche;
-	}
 }
 
 /**
