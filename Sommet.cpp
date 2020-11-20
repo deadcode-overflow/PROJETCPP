@@ -9,7 +9,7 @@ using namespace std;
 * 
 * description : affecte '\0' à lettre et 0 à freq
 */
-Sommet::Sommet() : lettre('\0'), freq(0) {}
+Sommet::Sommet() : freq(0) , lettre('\0'){}
 
 /**
  * usage : constructeur de copie
@@ -18,7 +18,7 @@ Sommet::Sommet() : lettre('\0'), freq(0) {}
  * description : affecte @lettre de @s dans @lettre de l'objet courant
  *				 affecte @freq de @s dans @freq de l'objet courant
 */
-Sommet::Sommet(Sommet& s) : lettre(s.lettre), freq(s.freq) {}
+Sommet::Sommet(Sommet& s) : freq(s.freq), lettre(s.lettre) {}
 
 /**
  * usage : constructeur par valeur
@@ -27,7 +27,7 @@ Sommet::Sommet(Sommet& s) : lettre(s.lettre), freq(s.freq) {}
  * description : affecte @lettre en argument, à @lettre de l'objet courant
  *				 affecte @freq en argument, à @freq de l'objet courant
 */
-Sommet::Sommet(char lettre, int freq) : lettre(lettre), freq(freq) {}
+Sommet::Sommet(char lettre, int freq) : freq(freq), lettre(lettre) {}
 
 /**
  * usage : destructeur

@@ -1,42 +1,22 @@
-DEBUG=no
-CXX=g++
-ifeq ($(DEBUG),yes)
-	CXXFLAGS= -O0 -g
-	LDFLAGS= -Wall -Wextra -O0 -g
-else
-	CXXFLAGS= -O2
-	LDFLAGS= -Wall -Wextra -O2
-endif
-EXEC= main
-SRC= main.cpp Sommet.cpp ArbreB.cpp test.cpp
-OBJ= $(SRC:.cpp=.o)
+run : main
+	./main
 
+main : main.o Sommet.o ArbreB.o test.o
+	g++ -Wall -Wextra -O2 -o main main.o Sommet.o ArbreB.o test.o
 
-ifeq ($(DEBUG),yes)
-run : $(EXEC)
-	echo "--mode debug--\n" & gdb $< 
-else
-run : $(EXEC)
-	echo "--mode release--\n" & ./$<
-endif
-
-main : $(OBJ)
-	$(CXX) -o $@ $(LDFLAGS) $^
-
-main.o : Sommet.h
-
-Sommet.o : Sommet.h
-
-ArbreB.o : ArbreB.h
+main.o : Sommet.h ArbreB.h test.h
+	g++ -c main.cpp
 
 test.o : test.h
+	g++ -c test.cpp
+	
+Sommet.o : Sommet.h
+	g++ -c Sommet.cpp
 
-%.o : %.cpp
-	$(CXX) -c $< $(CXXFLAGS)
-
-.PHONY : clean
+ArbreB.o : ArbreB.h Sommet.h
+	g++ -c ArbreB.cpp
 
 clean :
 	rm -f *.o
-	rm -f $(EXEC)
+	rm -f main
 	clear
