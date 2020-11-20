@@ -36,7 +36,7 @@ ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {}
 ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauche(0) {}
 
 /**
- * usage : destrcuteur
+ * usage : destructeur
  *
  * description : désalloue le sous arbre gauche et le sous arbre droite d'un arbre binaire
 */
