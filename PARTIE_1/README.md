@@ -131,7 +131,7 @@ Une fois cette commande effectuée, et si tout c'est bien déroulé, les fichier
 
 ## Exécution du programme
 ---
-Pour exécuter l'exécutable du projet, il suffit de taper `./bin/main` dans le terminal.
+Pour exécuter l'exécutable du projet, il vous suffit de taper `./bin/main` dans le terminal.
 
 ## Suppression projet
 ---
@@ -175,7 +175,7 @@ Une fois cette commande effectuée, et si tout c'est bien déroulé, le build du
 
 ## Exécution du programme Qt
 ---
-Pour exécuter le programme du projet, il suffit de taper `./build/Main` dans le terminal.
+Pour exécuter le programme du projet, il vous suffit de taper `./build/Main` dans le terminal.
 
 ## Suppression du build
 ---
