@@ -25,28 +25,18 @@ Si vous utilisez une distibution Linux, dérivant de Débian ou Ubuntu, la comma
 $ sudo apt-get install <nom-du-package>
 ```
 
-# Création du build
+# Création et compilation du build
 ---
-Pour construire le build Qt du projet, il vous suffit d'exécuter la commande `cmake`, suivie de l'emplacement du `CMakeLists.txt` du projet Qt dans le terminal.
-
-L'emplacement de ce fichier ce trouve dans le répertoire :
+Pour construire le build Qt du projet, puis le compiler, il vous suffit d'exécuter la commande :
 ```
-./PARTIE_1/Qt/CMakeLists.txt
+make qt_build
 ```
-Voici donc la commade :
-```
-$ cmake ../Qt
-```
-Une fois cette commande effectuée, et si tout c'est bien déroulé, le build du projet et un Makefile correspondant sont générés.
-
-# Compilation du build
----
-Pour compiler le build du projet, il vous suffit maintenant, de taper la commande `make` dans le terminal. Une fois cette commande effectuée un fichier exécutable `Main` est généré.
+Une fois cette commande effectuée, et si tout c'est bien déroulé, le build du projet et un Makefile correspondant sont générés dans le repertoire local `build/` dans un premier temps. Puis, dans un deuxième temps, un fichier exécutable `Main` est généré.
 
 # Exécution du programme
 ---
-Pour exécuter le programme du projet, il suffit de taper `./Main` dans le terminal.
+Pour exécuter le programme du projet, il suffit de taper `./build/Main` dans le terminal.
 
 # Suppression du build
 ---
-Pour supprimer le build, ainsi que tous les fichiers générés, vous pouvez utiliser la commande `make clean_Qt_build` ou simplement `make clean` dans le répertoire `PARTIE_1`.
+Pour supprimer le build, ainsi que tous les fichiers générés, vous pouvez utiliser la commande `make clean_qt_build` ou simplement `make clean`.

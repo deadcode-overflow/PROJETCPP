@@ -36,7 +36,7 @@ clean_project:
 	@echo "\nall clean project completed"
 
 # Delete all Qt build from all parts - (part 2 and 3 not finish)
-clean_Qt_build:
+clean_qt_build:
 	@echo "----------PARTIE_1----------"
-	$(MAKE) -C $(PART_ONE) clean_Qt_build
+	$(MAKE) -C $(PART_ONE) clean_qt_build
 	@echo "\nall clean build completed"

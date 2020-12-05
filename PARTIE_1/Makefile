@@ -73,9 +73,7 @@ clean_project:
 	@echo "--------------"
 
 # Delete local Qt build
-clean_Qt_build:
-	@mv $(BUILD_QT)/README.md .
+clean_qt_build:
 	@rm -rfv $(BUILD_QT)/*
 	@echo "\nbuild clean"
-	@mv README.md $(BUILD_QT)
 	@echo "------------"
