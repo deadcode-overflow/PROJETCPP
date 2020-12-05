@@ -50,8 +50,8 @@ clean: clean_Qt_build clean_project
 # Delete all local generated directories and their components
 clean_project:
 	@rm -fv *.o
-	@rm -rfv $(DIR_EXEC)*
-	@rm -rfv $(DIR_OBJ)*
+	@rm -rfv $(DIR_EXEC)/*
+	@rm -rfv $(DIR_OBJ)/*
 	@rm -dfv $(DIR_EXEC)
 	@rm -dfv $(DIR_OBJ)
 	@echo "\nproject clean"
@@ -59,13 +59,9 @@ clean_project:
 
 TARGET=build
 
-# Build local Qt build in ./build/ directory
-build:
-	${MAKE} -C $(TARGET) all
-
 # Delete local Qt build
 clean_Qt_build:
-	@mv $(TARGET)/README.md ./
+	@mv $(TARGET)/README.md .
 	@rm -rfv $(TARGET)/*
 	@echo "\nbuild clean"
 	@mv README.md $(TARGET)
