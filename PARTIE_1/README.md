@@ -131,7 +131,7 @@ Une fois cette commande effectuée, et si tout c'est bien déroulé, les fichier
 
 ## Exécution du programme
 ---
-Pour exécuter le programme du projet, il suffit de taper `./bin/main` dans le terminal.
+Pour exécuter l'exécutable du projet, il suffit de taper `./bin/main` dans le terminal.
 
 ## Suppression projet
 ---
