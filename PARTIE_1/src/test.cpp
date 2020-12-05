@@ -1,7 +1,8 @@
+#include "../inc/test.h"
+#include "../inc/Sommet.h"
+#include "../inc/ArbreB.h"
+
 #include <iostream>
-#include "test.h"
-#include "Sommet.h"
-#include "ArbreB.h"
 
 using namespace std;
 
@@ -189,9 +190,11 @@ int test() {
     //test decomposition
     ArbreB AbrDroit, AbrGauche;
     N.decomposer(&AbrGauche, &AbrDroit, &N);
+   
     cout << "AbrGauche de N fusion" << endl;
     cout << AbrGauche.getSommet();
     AbrGauche.print_t(0,0,&AbrGauche);
+    
     cout << "AbrDroit de N fusion" << endl;
     cout << AbrDroit.getSommet();
     AbrDroit.print_t(0,0,&AbrDroit);

@@ -1,5 +1,6 @@
-#include "ArbreB.h"
-#include "Sommet.h"
+#include "../inc/ArbreB.h"
+#include "../inc/Sommet.h"
+
 #include <iostream>
 
 using namespace std;
@@ -11,7 +12,7 @@ using namespace std;
  * 		initialise la @racine de l'objet courant avec le constructeur par defaut de l'objet de type Sommet
  *		initialise @precedant, @droite et @gauche à null.
 */
-ArbreB::ArbreB() : racine(), precedent(0), droite(0), gauche(0) {}
+ArbreB::ArbreB() : racine(), droite(0), gauche(0), precedent(0) {}
 
 /**
  * usage : constructeur par référence
@@ -22,7 +23,7 @@ ArbreB::ArbreB() : racine(), precedent(0), droite(0), gauche(0) {}
  *		initialise @precedant avec l'objet courant
  * 		initialise @droite et @gauche à null.
 */
-ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {}
+ArbreB::ArbreB(Sommet& s) : racine(s), droite(0), gauche(0), precedent(this) {}
 
 /**
  * usage : constructeur par référence
@@ -33,7 +34,7 @@ ArbreB::ArbreB(Sommet& s) : racine(s), precedent(this), droite(0), gauche(0) {}
  *		initialise @precedant avec @A
  * 		initialise @droite et @gauche à null.
 */
-ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), precedent(A), droite(0), gauche(0) {}
+ArbreB::ArbreB(Sommet& s, ArbreB* A) : racine(s), droite(0), gauche(0), precedent(A) {}
 
 /**
  * usage : destructeur

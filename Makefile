@@ -1,22 +1,11 @@
-run : main
-	./main
+.PHONY : clean
 
-main : main.o Sommet.o ArbreB.o test.o
-	g++ -Wall -Wextra -O2 -o main main.o Sommet.o ArbreB.o test.o
-
-main.o : Sommet.h ArbreB.h test.h
-	g++ -c main.cpp
-
-test.o : test.h
-	g++ -c test.cpp
-	
-Sommet.o : Sommet.h
-	g++ -c Sommet.cpp
-
-ArbreB.o : ArbreB.h Sommet.h
-	g++ -c ArbreB.cpp
-
+# Delete all Qt build from all project parts
 clean :
-	rm -f *.o
-	rm -f main
-	clear
+	@echo "----------PARTIE 1----------"
+	${MAKE} -C PARTIE_1 clean
+	@echo "----------PARTIE 2----------"
+	@rm -rfv PARTIE_2/build/*
+	@echo "----------PARTIE 3----------"
+	@rm -rfv PARTIE_3/build/*
+	@echo "\nall clean completed"

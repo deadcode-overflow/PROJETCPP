@@ -1,6 +1,6 @@
-#include "Sommet.h"
+#include "../inc/Sommet.h"
+
 #include <iostream>
-#include <stdio.h>
 
 using namespace std;
 

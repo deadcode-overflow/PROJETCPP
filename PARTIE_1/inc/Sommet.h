@@ -1,7 +1,6 @@
 #ifndef SOMMET_H
 #define SOMMET_H
 
-#include <stdio.h>
 #include <iostream>
 
 using namespace std;
@@ -26,11 +25,11 @@ class Sommet {
 		void setChar(char c);
 
 		// Surchages d'opérateurs
-		bool operator ==(Sommet& s); // s1 == s2
-		bool operator <(Sommet& s); // s1 < s2
-		bool operator >(Sommet& s); // s1 > s2
-		Sommet& operator =(Sommet& s); //s1 = s2
-		friend ostream& operator<<(ostream& flux, Sommet& s); // cout << s
-		friend ostream& operator<<(ostream& flux, Sommet* s); // cout << *s
+		bool operator ==(Sommet& s);
+		bool operator <(Sommet& s);
+		bool operator >(Sommet& s);
+		Sommet& operator =(Sommet& s);
+		friend ostream& operator<<(ostream& flux, Sommet& s);
+		friend ostream& operator<<(ostream& flux, Sommet* s);
 };
 #endif
