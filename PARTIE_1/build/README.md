@@ -20,7 +20,7 @@ Veuillez également installez les `packages` suivant :
  * `qtbase5-dev`
  * `qtdeclarative5-dev`
     
-Si vous êtes utilisez une distibution Linux, dérivant de Débian ou Ubuntu, la commande de base est la suivante :
+Si vous utilisez une distibution Linux, dérivant de Débian ou Ubuntu, la commande de base est la suivante :
 ```bash
 $ sudo apt-get install <nom-du-package>
 ```
