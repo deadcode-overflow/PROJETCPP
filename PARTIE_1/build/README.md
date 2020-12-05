@@ -29,7 +29,7 @@ $ sudo apt-get install <nom-du-package>
 ---
 Pour construire le build Qt du projet, il vous suffit d'exécuter la commande `cmake`, suivie de l'emplacement du `CMakeLists.txt` du projet Qt dans le terminal.
 
-L'emplacement de ce fichier ce trouve dans le repertoire :
+L'emplacement de ce fichier ce trouve dans le répertoire :
 ```
 ./PARTIE_1/Qt/CMakeLists.txt
 ```
@@ -41,12 +41,12 @@ Une fois cette commande effectuée, et si tout c'est bien déroulé, le build du
 
 # Compilation du build
 ---
-Pour compiler le build du projet, il vous suffit maintenant, de taper la commande `make` dans le terminal. Une fois cette commande effectuée un fichier exécutable `Main` est générés.
+Pour compiler le build du projet, il vous suffit maintenant, de taper la commande `make` dans le terminal. Une fois cette commande effectuée un fichier exécutable `Main` est généré.
 
 # Exécution du programme
 ---
-Pour executer le programme du projet, il suffit de taper `./Main` dans le terminal.
+Pour exécuter le programme du projet, il suffit de taper `./Main` dans le terminal.
 
 # Suppression du build
 ---
-Pour supprimer le build ainsi que tous les fichiers générés, vous pouvez utiliser la commande `make clean_Qt_build` ou simplement `make clean` dans le repertoire `PARTIE_1/`.
+Pour supprimer le build, ainsi que tous les fichiers générés, vous pouvez utiliser la commande `make clean_Qt_build` ou simplement `make clean` dans le répertoire `PARTIE_1`.
