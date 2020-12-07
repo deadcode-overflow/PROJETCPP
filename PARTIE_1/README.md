@@ -185,7 +185,7 @@ Le build est répartie en 3 dossiers :
 
   * `build/` : qui contient les fichiers nécéssaires à la compilation du build Qt, et la génération du fichier exécutable `Main`.
 
- Le build est répartie en 6 fichiers :
+ Le build est répartie en 5 fichiers :
 
   * `main.cpp` : qui contient le programme principal.
   
