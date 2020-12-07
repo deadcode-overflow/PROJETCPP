@@ -45,6 +45,7 @@ checkconfig:
 main.exe: $(OBJ)
 	$(CXX) $(LDFLAGS) -o $(DIR_EXEC)/$@  $(addprefix $(DIR_OBJ)/,$^)
 	@echo "compilation success"
+	@echo "----------------"
 
 main.o: test.h
 
@@ -57,10 +58,10 @@ ArbreB.o: ArbreB.h Sommet.h
 %.o: %.cpp
 	$(CXX) $(OFLAGS) $(CXXFLAGS) -c $< -o $(DIR_OBJ)/$@
 
-.PHONY: clean clean_project clean_Qt_build checkconfig
+.PHONY: clean clean_project clean_qt_build checkconfig
 
 # Delete all
-clean: clean_Qt_build clean_project
+clean: clean_qt_build clean_project
 
 # Delete local generated directories and their components
 clean_project:
@@ -69,13 +70,13 @@ clean_project:
 	@rm -rfv $(DIR_OBJ)/*
 	@rm -dfv $(DIR_EXEC)
 	@rm -dfv $(DIR_OBJ)
-	@echo "\nproject clean"
+	@echo "project clean"
 	@echo "--------------"
 
 # Delete local Qt build
 clean_qt_build:
 	@mv $(BUILD_QT)/README.md .
 	@rm -rfv $(BUILD_QT)/*
-	@echo "\nbuild clean"
+	@echo "build clean"
 	@mv README.md $(BUILD_QT)
 	@echo "------------"
