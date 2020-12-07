@@ -14,11 +14,11 @@
 
   * `inc/` : qui contient les fichiers d'en-tête **(.h)** du projet. 
 
-  * `obj/` : qui un fois compilé, contient les fichiers intermédiares **(.o)** du projet.
+  * `obj/` : qui une fois compilé, contient les fichiers intermédiares **(.o)** du projet.
 
   * `bin/` : qui une fois compilé, contient le fichier exécutable `main.exe`.
 
- Le build est répartie en 6 fichiers :
+ Le programme est répartie en 5 fichiers :
 
   * `main.cpp` : qui contient le programme principal.
 
@@ -26,7 +26,7 @@
 
   * `texte.txt` : qui est le fichier de texte qui contient le texte sur lequel on test le codage de Huffman.
 
-  * `Makefile` : qui permet de générés tous le fichiers et dossiers du projet.
+  * `Makefile` : qui permet de générer tous les fichiers et dossiers du projet.
 
  ## Compilation du projet
  ---
