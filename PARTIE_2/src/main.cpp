@@ -1,4 +1,6 @@
 #include "../inc/huffman.h"
+#include "../inc/ArbreB.h"
+#include "../inc/Sommet.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -17,5 +19,9 @@ int main(void) {
 	afficher_frequence_alphabet(frequence_alphabet);
 	afficher_texte(texte_clair);
 
+	vector<Sommet> sommets;
+	creer_sommet(sommets, frequence_alphabet);
+	//afficher_sommets(sommets);
+	
 	return 0;
 }

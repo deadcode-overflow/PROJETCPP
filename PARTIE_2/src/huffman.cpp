@@ -1,3 +1,4 @@
+#include "../inc/Sommet.h"
 #include "../inc/huffman.h"
 #include <iostream>
 #include <fstream>
@@ -28,7 +29,7 @@ void verification_fichier(fstream& fichier, string nom) {
 }
 
 vector<string> copier_texte(fstream& fichier){
-	vector<string> texte; 
+	vector<string> texte;
 	string ligne;
 	while(getline(fichier, ligne)) {
 		texte.push_back(ligne);
@@ -53,19 +54,31 @@ void calculer_frequence_alphabet(vector<string> texte, map<char, int>& frequence
 		for(string ligne : texte) {
 			frequence += calcul_freq(alphabet_latin[i], ligne);
 		}
-		frequence_alphabet[alphabet_latin[i]] = frequence; 
+		frequence_alphabet[alphabet_latin[i]] = frequence;
 		frequence = 0;
 	}
 }
 
 void afficher_frequence_alphabet(map<char, int> frequence_alphabet) {
-	for(int  i = 0; i < ALPHABET_LATIN; i++){
-		cout << frequence_alphabet[alphabet_latin[i]] << endl;
-	}
+	for(int  i = 0; i < ALPHABET_LATIN; i++)
+		cout << alphabet_latin[i] << " " << frequence_alphabet[alphabet_latin[i]] << endl;
+	cout << endl;
 }
 
 void afficher_texte(vector<string> texte) {
-	for(string ligne : texte) {
+	for(string ligne : texte)
 		cout << ligne << endl;
-	}
+	cout << endl;
+}
+
+void creer_sommet(vector<Sommet>& sommets, map<char, int> frequence_alphabet) {
+	for(int i = 0; i < 26; i++) {
+		Sommet s(alphabet_latin[i], frequence_alphabet[alphabet_latin[i]]);
+		sommets.push_back(s);
+	}	
+}
+
+void afficher_sommets(vector<Sommet> sommets) {
+	for(Sommet& s : sommets)
+		cout << s << endl;
 }

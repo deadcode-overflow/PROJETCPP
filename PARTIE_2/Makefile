@@ -4,7 +4,7 @@ LDFLAGS=
 OFLAGS=-I inc
 
 EXEC=main.exe
-SRC=main.cpp huffman.cpp
+SRC=main.cpp huffman.cpp Sommet.cpp ArbreB.cpp
 OBJ=$(SRC:.cpp=.o)
 
 DIR_EXEC=bin
@@ -50,6 +50,10 @@ main.exe: $(OBJ)
 main.o: huffman.h
 
 huffman.o: huffman.h
+
+Sommet.o: Sommet.h
+
+ArbreB.o: ArbreB.h Sommet.h
 
 %.o: %.cpp
 	$(CXX) $(OFLAGS) $(CXXFLAGS) -c $< -o $(DIR_OBJ)/$@
