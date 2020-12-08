@@ -17,7 +17,7 @@ project:
 qt_build:
 	@$(MAKE) -C $(PART_ONE) qt_build
 	@$(MAKE) -C $(PART_TWO) qt_build
-	@echo "\nall builds are generated"
+	@echo "\nall builds are generated and compiled"
 
 # Delete all from all parts - (part 2 and 3 not finish)
 clean:

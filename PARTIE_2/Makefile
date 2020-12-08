@@ -44,7 +44,7 @@ checkconfig:
 
 main.exe: $(OBJ)
 	$(CXX) $(LDFLAGS) -o $(DIR_EXEC)/$@  $(addprefix $(DIR_OBJ)/,$^)
-	@echo "compilation success"
+	@echo "\ncompilation success"
 	@echo "----------------"
 
 main.o: huffman.h
@@ -66,8 +66,8 @@ clean_project:
 	@rm -rfv $(DIR_OBJ)/*
 	@rm -dfv $(DIR_EXEC)
 	@rm -dfv $(DIR_OBJ)
-	@echo "project clean"
-	@echo "--------------"
+	@echo "\nproject clean"
+	@echo "------------"
 
 # Delete local Qt build
 clean_qt_build:
@@ -76,6 +76,6 @@ clean_qt_build:
 	@rm -fv $(BUILD_QT)/Makefile
 	@rm -fv $(BUILD_QT)/CMakeLists.txt
 	@rm -rf $(BUILD_QT)/*
-	@echo "build clean"
+	@echo "\nbuild clean"
 	@mv ../README.md $(BUILD_QT)
-	@echo "------------"
+	@echo "----------"
