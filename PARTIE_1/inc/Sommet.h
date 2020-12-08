@@ -12,7 +12,7 @@ class Sommet {
 	public :
 		// Constructeurs
 		Sommet();
-		Sommet(Sommet& s);
+		Sommet(const Sommet& s);
 		Sommet(char Slettre, int Sfreq);
 		// Destructeur
 		~Sommet();

@@ -18,7 +18,7 @@ Sommet::Sommet() : freq(0) , lettre('\0'){}
  * description : affecte @lettre de @s dans @lettre de l'objet courant
  *				 affecte @freq de @s dans @freq de l'objet courant
 */
-Sommet::Sommet(Sommet& s) : freq(s.freq), lettre(s.lettre) {}
+Sommet::Sommet(const Sommet& s) : freq(s.freq), lettre(s.lettre) {}
 
 /**
  * usage : constructeur par valeur
