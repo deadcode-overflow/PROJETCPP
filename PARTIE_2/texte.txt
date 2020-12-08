@@ -1,3 +1,3 @@
 Felicitation, voici le premier texte que nous devons lire. Comptons le nombre d'occurence pour chaque lettre de ce texte.
-Une fois fait, nous devrons coder ce texte avec la méthode de Huffman, et comparer le texte original, avec le texte crypté.
-Bonne chance à nous.
+Une fois fait, nous devrons coder ce texte avec la méthode de Huffman, et comparer le texte original, avec le texte crypte.
+Bonne chance a nous.

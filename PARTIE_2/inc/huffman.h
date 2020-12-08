@@ -7,10 +7,10 @@
 using namespace std;
 
 string choisir_texte();
-void verification_fichier(fstream& file, string name);
-vector<string> copier_texte(fstream& file);
-int calcul_freq(char c, string s);
-void afficher_frequence_alphabet(vector<string> texte);
+void verification_fichier(fstream& fichier, string nom);
+vector<string> copier_texte(fstream& fichier);
+void calculer_frequence_alphabet(vector<string> texte, map<char, int>& frequence_alphabet);
+void afficher_frequence_alphabet(map<char, int> frequence_alphabet);
 void afficher_texte(vector<string> texte);
 
 #endif
