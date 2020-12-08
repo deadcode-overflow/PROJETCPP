@@ -8,6 +8,9 @@
 
 using namespace std;
 
+#define ALPHABET_LATIN 26
+const char alphabet_latin[ALPHABET_LATIN] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
 string choisir_texte() {
 	string nom_fichier;
 	cout << "Entrez le nom du fichier texte : " << endl;
@@ -35,7 +38,6 @@ vector<string> copier_texte(fstream& fichier){
 
 int calcul_freq(char c, string s) {
     int freq = 0;
-	string::size_type i;
 	for(size_t i = 0; i < s.size(); i++) {
 		if(s[i] == c)
 			freq++;
@@ -47,19 +49,19 @@ int calcul_freq(char c, string s) {
 
 void calculer_frequence_alphabet(vector<string> texte, map<char, int>& frequence_alphabet) {
 	int frequence;
-	char alphabet_latin[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	for(int i = 0; i < 26; i++) {
 		for(string ligne : texte) {
 			frequence += calcul_freq(alphabet_latin[i], ligne);
 		}
-		frequence_alphabet[alphabet_latin[i]] = frequence;
+		frequence_alphabet[alphabet_latin[i]] = frequence; 
 		frequence = 0;
 	}
 }
 
 void afficher_frequence_alphabet(map<char, int> frequence_alphabet) {
-	for(size_t i = 0; i < frequence_alphabet.max_size(); i++)
-		cout << frequence_alphabet[i] << endl;
+	for(int  i = 0; i < ALPHABET_LATIN; i++){
+		cout << frequence_alphabet[alphabet_latin[i]] << endl;
+	}
 }
 
 void afficher_texte(vector<string> texte) {

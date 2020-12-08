@@ -35,7 +35,7 @@ $(BUILD_DIR):
 
 # Create local Qt build 
 qt_build: checkconfig
-	$(MAKE) -C $(BUILD_QT) qt_build
+	@$(MAKE) -C $(BUILD_QT) qt_build
 
 # Verify if Makefile in local Qt build already exist, create him if not.
 checkconfig:
@@ -76,7 +76,10 @@ clean_project:
 # Delete local Qt build
 clean_qt_build:
 	@mv $(BUILD_QT)/README.md ../
-	@rm -rfv $(BUILD_QT)/*
+	@rm -fv $(BUILD_QT)/Main
+	@rm -fv $(BUILD_QT)/Makefile
+	@rm -fv $(BUILD_QT)/CMakeLists.txt
+	@rm -rf $(BUILD_QT)/*
 	@echo "build clean"
 	@mv ../README.md $(BUILD_QT)
 	@echo "------------"

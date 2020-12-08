@@ -9,31 +9,31 @@ all: project qt_build
 
 # Compile project from all parts - (part 2 and 3 not finish)
 project:
-	$(MAKE) -C $(PART_ONE) project
-	$(MAKE) -C $(PART_TWO) project
-	@echo "\nall project generated"
+	@$(MAKE) -C $(PART_ONE) project
+	@$(MAKE) -C $(PART_TWO) project
+	@echo "\nall projects are compiled"
 
 # Create Qt build  from all parts - (part 2 and 3 not finish)
 qt_build:
-	$(MAKE) -C $(PART_ONE) qt_build
-	$(MAKE) -C $(PART_TWO) qt_build
-	@echo "\nall build generated"
+	@$(MAKE) -C $(PART_ONE) qt_build
+	@$(MAKE) -C $(PART_TWO) qt_build
+	@echo "\nall builds are generated"
 
 # Delete all from all parts - (part 2 and 3 not finish)
 clean:
-	${MAKE} -C $(PART_ONE) clean
-	${MAKE} -C $(PART_TWO) clean
+	@${MAKE} -C $(PART_ONE) clean
+	@${MAKE} -C $(PART_TWO) clean
 	@rm -rfv PARTIE_3/build/*
-	@echo "\nall clean completed"
+	@echo "\nall cleans are completed"
 
 # Delete all generated directories and their components from all parts - (part 2 and 3 not finish)
 clean_project:
-	$(MAKE) -C $(PART_ONE) clean_project
-	$(MAKE) -C $(PART_TWO) clean_project
-	@echo "\nall clean project completed"
+	@$(MAKE) -C $(PART_ONE) clean_project
+	@$(MAKE) -C $(PART_TWO) clean_project
+	@echo "\nall cleans projects are completed"
 
 # Delete all Qt build from all parts - (part 2 and 3 not finish)
 clean_qt_build:
-	$(MAKE) -C $(PART_ONE) clean_qt_build
-	$(MAKE) -C $(PART_TWO) clean_qt_build
-	@echo "\nall clean build completed"
+	@$(MAKE) -C $(PART_ONE) clean_qt_build
+	@$(MAKE) -C $(PART_TWO) clean_qt_build
+	@echo "\nall cleans builds are completed"
