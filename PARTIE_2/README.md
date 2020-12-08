@@ -37,6 +37,7 @@
  ## Exécution du programme
  ---
  Pour exécuter le programme du projet, il vous suffit de taper `./bin/main.exe` dans le terminal.
+ Entrez le fichier de test `texte.txt`, pour tester le programme.
 
  ## Suppression du projet
  ---
