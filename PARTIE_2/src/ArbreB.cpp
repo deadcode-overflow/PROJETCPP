@@ -476,20 +476,20 @@ ArbreB& ArbreB::fusionner(ArbreB* A) {
  *
  * description : ajout de manière récursive le sous-arbre gauche de l'arbe binaire passé en paramètre
 */
-void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
+void ArbreB::recupererGauche(ArbreB* Ag, ArbreB* A) {
 	if(!A || A->getSommet().getChar() == 0) {
 		return;
 	}
 
 	if(A->racine == racine) {
-		ajouterGauche(Ag, A->gauche);
+		recupererGauche(Ag, A->gauche);
 		return;
 	}
 
 	Ag->ajouter(A->racine);
 
-	ajouterGauche(Ag, A->gauche);
-	ajouterGauche(Ag, A->droite);
+	recupererGauche(Ag, A->gauche);
+	recupererGauche(Ag, A->droite);
 }
 
 /**
@@ -498,20 +498,20 @@ void ArbreB::ajouterGauche(ArbreB* Ag, ArbreB* A) {
  *
  * description : ajout de manière récursive le sous-arbre droit de l'arbe binaire passé en paramètre
 */
-void ArbreB::ajouterDroite(ArbreB* Ad, ArbreB* A) {
+void ArbreB::recupererDroite(ArbreB* Ad, ArbreB* A) {
 	if(!A || A->getSommet().getChar() == 0) {
 		return;
 	}
 
 	if(A->racine == racine) {
-		ajouterDroite(Ad, A->droite);
+		recupererDroite(Ad, A->droite);
 		return;
 	}
 
 	Ad->ajouter(A->racine);
 
-	ajouterDroite(Ad, A->gauche);
-	ajouterDroite(Ad, A->droite);
+	recupererDroite(Ad, A->gauche);
+	recupererDroite(Ad, A->droite);
 }
 
 /**
@@ -528,8 +528,8 @@ void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
 		return;
 	}
 
-	Ag->ajouterGauche(Ag, A->gauche);
-	Ad->ajouterDroite(Ad, A->droite);
+	Ag->recupererGauche(Ag, A->gauche);
+	Ad->recupererDroite(Ad, A->droite);
 }
 
 /**
@@ -634,4 +634,17 @@ int ArbreB::nombre_element(ArbreB* A) {
 	}
 
 	return 1 + nombre_element(A->gauche) + nombre_element(A->droite);
+}
+
+void ArbreB::ajouterGauche(ArbreB* A1, ArbreB* A) {
+	A->gauche = new ArbreB(A1->getSommet(),A);
+}
+
+void ArbreB::ajouterDroite(ArbreB* A2, ArbreB* A) {
+	A->droite = new ArbreB(A2->getSommet(),A);
+}
+
+ArbreB& ArbreB::setFreq(ArbreB* A1, ArbreB* A2) {
+	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
+	return *this;
 }

@@ -28,7 +28,7 @@ class Sommet {
 		bool operator ==(Sommet& s);
 		bool operator <(Sommet& s);
 		bool operator >(Sommet& s);
-		Sommet& operator =(Sommet& s);
+		Sommet& operator =(const Sommet& s);
 		friend ostream& operator<<(ostream& flux, Sommet& s);
 		friend ostream& operator<<(ostream& flux, Sommet* s);
 };

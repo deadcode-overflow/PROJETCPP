@@ -28,6 +28,7 @@ class ArbreB : public Sommet
 		ArbreB* getDroite();
 		ArbreB* getGauche();
 		ArbreB* getPrecedent();
+		ArbreB& setFreq(ArbreB* A1, ArbreB* A2);
 
 		// Méthodes
 		ArbreB& ajouter(Sommet& s);
@@ -45,8 +46,9 @@ class ArbreB : public Sommet
 		ArbreB* min(ArbreB* A); //retourne l'arbre (feuille) minimal de l'arbre
 		ArbreB* max(ArbreB* A); //retourne l'arbre (feuille) maximal de l'arbre
 		void copier(ArbreB* A1, ArbreB* A2); //sert pour constructeur copie
-		void ajouterGauche(ArbreB* Ag, ArbreB* A); //ajoute le sous-arbre gauche d'un arbre binaire
-		void ajouterDroite(ArbreB* Ad, ArbreB* A); //ajoute le sous-arbre droit d'un arbre binaire
-
+		void recupererGauche(ArbreB* Ag, ArbreB* A); //recupere le sous-arbre gauche d'un arbre binaire
+		void recupererDroite(ArbreB* Ad, ArbreB* A); //recupere le sous-arbre droit d'un arbre binaire
+		void ajouterGauche(ArbreB* Ag, ArbreB* A);
+		void ajouterDroite(ArbreB* Ad, ArbreB* A);
 };
 #endif

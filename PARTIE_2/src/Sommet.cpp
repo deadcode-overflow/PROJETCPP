@@ -119,7 +119,7 @@ bool Sommet::operator >(Sommet& s) {
  *
  * description : surcharge de l'opérateur =, en affectant @lettre @s dans @lettre de l'objet courant et en affectant @freq de @s dans @freq de l'objet courant
 */
-Sommet& Sommet::operator =(Sommet& s) {
+Sommet& Sommet::operator =(const Sommet& s) {
 	lettre = s.lettre;
 	freq = s.freq;
 

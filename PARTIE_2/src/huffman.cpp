@@ -1,3 +1,4 @@
+#include "../inc/ArbreB.h"
 #include "../inc/Sommet.h"
 #include "../inc/huffman.h"
 #include <iostream>
@@ -73,8 +74,10 @@ void afficher_texte(vector<string> texte) {
 
 void creer_sommet(vector<Sommet>& sommets, map<char, int> frequence_alphabet) {
 	for(int i = 0; i < 26; i++) {
-		Sommet s(alphabet_latin[i], frequence_alphabet[alphabet_latin[i]]);
-		sommets.push_back(s);
+		if(frequence_alphabet[alphabet_latin[i]] != 0) {
+			Sommet s(alphabet_latin[i], frequence_alphabet[alphabet_latin[i]]);
+			sommets.push_back(s);
+		}
 	}	
 }
 
@@ -82,3 +85,21 @@ void afficher_sommets(vector<Sommet> sommets) {
 	for(Sommet& s : sommets)
 		cout << s << endl;
 }
+
+int comparaison(Sommet& a,Sommet& b) {
+    return a.getFreq() == b.getFreq() ? a.getFreq() < b.getFreq() : a.getFreq() < b.getFreq();
+}
+
+void creer_A1_A2(vector<Sommet>& sommets, ArbreB* A1, ArbreB* A2) {
+	A1->ajouter(sommets[sommets.size()-1]);
+	A2->ajouter(sommets[sommets.size()-2]);
+	sommets.pop_back();
+	sommets.pop_back();
+}
+
+void creer_A(ArbreB* A, ArbreB* A1, ArbreB* A2) {
+	A->ajouterGauche(A1, A);
+	A->ajouterDroite(A2, A);
+	A->setFreq(A1, A2);
+}
+
