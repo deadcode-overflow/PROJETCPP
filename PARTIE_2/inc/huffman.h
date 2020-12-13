@@ -17,11 +17,12 @@ void calculer_frequence_alphabet(vector<string>& texte, map<char, int>& frequenc
 void afficher_frequence_alphabet(map<char, int>& frequence_alphabet);
 void afficher_texte(vector<string>& texte);
 void creer_sommets(vector<Sommet>& sommets, map<char, int>& frequence_alphabet);
-void afficher_sommets(vector<Sommet>& sommets);
 int comparaison_sommets(Sommet& a,Sommet& b);
+void afficher_sommets(vector<Sommet>& sommets);
+void afficher_arbres(vector<ArbreB>& arbres);
+void afficher_arbres(vector<ArbreB*>& arbres);
+double taille_(vector<ArbreB>& feuilles);
 void creer_A1_A2(vector<Sommet>& sommets, ArbreB* A1, ArbreB* A2);
 void creer_A(ArbreB* A, ArbreB* A1, ArbreB* A2);
-void creer_arbres(vector<ArbreB*>& arbres, vector<Sommet>& sommets);
-int comparaison_arbres(ArbreB* a, ArbreB* b);
-void afficher_arbres(vector<ArbreB*>& arbres);
+void creer_arbres(ArbreB* huffman, vector<ArbreB>& feuilles);
 #endif

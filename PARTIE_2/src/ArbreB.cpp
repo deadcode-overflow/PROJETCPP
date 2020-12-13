@@ -45,7 +45,7 @@ ArbreB::~ArbreB() {
 	if(droite) {
 		delete droite;
 	}
-	if (gauche)
+	if(gauche)
 	{
 		delete gauche;
 	}
@@ -63,6 +63,7 @@ void ArbreB::copier(ArbreB* copie, ArbreB* A) {
 	if(!A) return;
 
 	copie->racine = A->racine;
+	
 	
 	if(A->gauche) {
 		copie->gauche = new ArbreB(A->gauche->racine);
@@ -648,5 +649,17 @@ void ArbreB::ajouterDroite(ArbreB* A2, ArbreB* A) {
 
 ArbreB& ArbreB::setFreq(ArbreB* A1, ArbreB* A2) {
 	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
+	return *this;
+}
+
+ArbreB& ArbreB::fusionner(ArbreB* A1, ArbreB* A2) {
+	if(racine.getChar() != 0)
+		return *this;
+
+	gauche = new ArbreB(A1);
+	droite = new ArbreB(A2);
+	precedent = this;
+	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
+
 	return *this;
 }

@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <array>
 
 using namespace std;
 
@@ -27,14 +28,32 @@ int main(void) {
 	reverse(sommets.begin(),sommets.end());
 	afficher_sommets(sommets);
 
-	cout << "-----------" << endl;
+	
 	vector<ArbreB*> arbres;
-	creer_arbres(arbres, sommets);
-	int i = 1;
-	arbres[i]->affichage_infixe(arbres[i]);
-	arbres[i]->afficher_arb(0,0,arbres[i]);
-	//reverse(arbres.begin(), arbres.end(), comparaison_arbres);
-	//afficher_arbres(arbres);
+	for(Sommet& s : sommets) {
+		arbres.push_back(new ArbreB(s));
+	}
+	cout << "FEUILLES" << endl;
+	afficher_arbres(arbres);
+
+	vector<ArbreB*> huffman;
+	size_t taille = arbres.size();
+	size_t index = 1;
+
+	for(size_t i = 1; i < taille/2; i++) {
+		ArbreB r;
+		r.fusionner(arbres[arbres.size()-index], arbres[arbres.size()-(index+1)]);
+		huffman.push_back(new ArbreB(&r));
+		index+=2;
+		huffman[0]->affichage_infixe(huffman[0]);
+		huffman[0]->afficher_arb(0,0,huffman[0]);
+	}
+	cout << "HUFFMAN" << endl;
+	afficher_arbres(huffman);
+
+	//ArbreB* huffman;
+	//creer_arbres(huffman, arbres);
+	
 	
 
 	return 0;

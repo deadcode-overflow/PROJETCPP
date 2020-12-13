@@ -36,6 +36,7 @@ class ArbreB : public Sommet
 		Sommet& rechercher(Sommet& s);
 		ArbreB& modifier(Sommet& s, char c, int f);
 		ArbreB& fusionner(ArbreB* A);
+		ArbreB& fusionner(ArbreB*A1, ArbreB* A2);
 		void decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A);
 		void affichage_infixe(ArbreB* A); //affichage infixe
 		void afficher_arb(int hauteur, int cote, ArbreB* A); //affichage arborescent

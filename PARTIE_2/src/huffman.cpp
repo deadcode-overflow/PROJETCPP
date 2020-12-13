@@ -12,7 +12,6 @@ using namespace std;
 
 #define ALPHABET_LATIN 26
 const char alphabet_latin[ALPHABET_LATIN] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-vector<ArbreB> arbres_huffman;
 
 string choisir_texte() {
 	string nom_fichier;
@@ -91,11 +90,18 @@ void afficher_sommets(vector<Sommet>& sommets) {
 		cout << s << endl;
 }
 
-void creer_A1_A2(vector<Sommet>& sommets, ArbreB* A1, ArbreB* A2) {
-	A1->ajouter(sommets[sommets.size()-1]);
-	A2->ajouter(sommets[sommets.size()-2]);
-	sommets.pop_back();
-	sommets.pop_back();
+void afficher_arbres(vector<ArbreB>& arbres) {
+	for(ArbreB& arbre : arbres) {
+		arbre.affichage_infixe(&arbre);
+		arbre.afficher_arb(0,0,&arbre);
+	}
+}
+
+void afficher_arbres(vector<ArbreB*>& arbres) {
+	for(size_t i=0; i < arbres.size(); i++) {
+		arbres[i]->affichage_infixe(arbres[i]);
+		arbres[i]->afficher_arb(0,0,arbres[i]);
+	}
 }
 
 void creer_A(ArbreB* A, ArbreB* A1, ArbreB* A2) {
@@ -104,30 +110,6 @@ void creer_A(ArbreB* A, ArbreB* A1, ArbreB* A2) {
 	A->setFreq(A1, A2);
 }
 
-void creer_arbres(vector<ArbreB*>& arbres, vector<Sommet>& sommets) {
-	size_t taille = sommets.size();
-	int a_size =0;
-	for(size_t i = 0; i < taille/2; i++) {
-		ArbreB A1, A2;
-		creer_A1_A2(sommets,&A1,&A2);
-		ArbreB A;
-		creer_A(&A,&A1,&A2);
-		
-		cout << "-vectorA----------" << endl;
-		arbres.push_back(new ArbreB(&A));
-		arbres[a_size]->affichage_infixe(arbres[a_size]);
-		arbres[a_size]->afficher_arb(0,0,arbres[a_size]);
-		a_size++;
-	}
-}
-
-int comparaison_arbres(ArbreB* a, ArbreB* b) {
-	return a->getSommet().getFreq() == b->getSommet().getFreq() ? a->getSommet().getFreq() < b->getSommet().getFreq() : a->getSommet().getFreq() < b->getSommet().getFreq();
-}
-
-void afficher_arbres(vector<ArbreB*>& arbres) {
-	for(size_t a_size=0; a_size < arbres.size(); a_size++) {
-		arbres[a_size]->affichage_infixe(arbres[a_size]);
-		arbres[a_size]->afficher_arb(0,0,arbres[a_size]);
-	}
-}
+/*void creer_arbres(ArbreB* huffman, vector<ArbreB>& feuilles) {
+	;
+}*/
