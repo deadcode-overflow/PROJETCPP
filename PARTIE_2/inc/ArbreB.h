@@ -37,8 +37,8 @@ class ArbreB : public Sommet
 		ArbreB& modifier(Sommet& s, char c, int f);
 		ArbreB& fusionner(ArbreB* A);
 		void decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A);
-		void afficher(ArbreB* A); //affichage infixe
-		void print_t(int hauteur, int cote, ArbreB* A); //affichage arborescent
+		void affichage_infixe(ArbreB* A); //affichage infixe
+		void afficher_arb(int hauteur, int cote, ArbreB* A); //affichage arborescent
 
 		//---------------------------------
 		int hauteur(ArbreB* A, int hg, int hd); //calcule la hauteur de l'arbre

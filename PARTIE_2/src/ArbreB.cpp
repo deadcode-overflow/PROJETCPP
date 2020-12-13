@@ -541,7 +541,7 @@ void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
  *
  * description : affiche de manière recursive l'arbre binaire en incrémentant la hauteur de 1
 */
-void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
+void ArbreB::afficher_arb(int hauteur, int cote, ArbreB* A) {
     if (A == nullptr)  {
     	return;
     }
@@ -563,8 +563,8 @@ void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
         }
     }
 
-    print_t (hauteur + 1, 0, A->getGauche());
-    print_t (hauteur + 1, 1, A->getDroite());
+    afficher_arb(hauteur + 1, 0, A->getGauche());
+    afficher_arb(hauteur + 1, 1, A->getDroite());
 }
 
 /**
@@ -573,18 +573,18 @@ void ArbreB::print_t(int hauteur, int cote, ArbreB* A) {
  *
  * description : affiche de manière recursive l'arbre en parcours infixe
 */
-void ArbreB::afficher(ArbreB* A) {
+void ArbreB::affichage_infixe(ArbreB* A) {
 	if(A == nullptr) return;
 
 	if(racine.getChar() == 0) {
-		cout << "l'arbre est vide" << endl;
+		cout << A->racine << endl;
 		return;
 	}
 
 	if(A) {
-		afficher(A->gauche);
+		affichage_infixe(A->gauche);
 		cout << A->racine;
-		afficher(A->droite);
+		affichage_infixe(A->droite);
 	}
 
 	cout << endl;
@@ -637,11 +637,13 @@ int ArbreB::nombre_element(ArbreB* A) {
 }
 
 void ArbreB::ajouterGauche(ArbreB* A1, ArbreB* A) {
-	A->gauche = new ArbreB(A1->getSommet(),A);
+	if(A1)
+		A->gauche = new ArbreB(A1->getSommet(),A);
 }
 
 void ArbreB::ajouterDroite(ArbreB* A2, ArbreB* A) {
-	A->droite = new ArbreB(A2->getSommet(),A);
+	if(A2)
+		A->droite = new ArbreB(A2->getSommet(),A);
 }
 
 ArbreB& ArbreB::setFreq(ArbreB* A1, ArbreB* A2) {

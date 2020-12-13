@@ -22,21 +22,20 @@ int main(void) {
 	afficher_texte(texte_clair);
 
 	vector<Sommet> sommets;
-	creer_sommet(sommets, frequence_alphabet);
-	sort(sommets.begin(), sommets.end(), comparaison);
+	creer_sommets(sommets, frequence_alphabet);
+	sort(sommets.begin(), sommets.end(), comparaison_sommets);
 	reverse(sommets.begin(),sommets.end());
 	afficher_sommets(sommets);
 
-	ArbreB A1;
-	ArbreB A2;
-
-	creer_A1_A2(sommets,&A1,&A2);
-	cout << "ARBRE A1 " << A1.getSommet() << endl;
-	cout << "ARBRE A2 " << A2.getSommet() << endl;
-
-	ArbreB A;
-	creer_A(&A, &A1,&A2);
-	cout << "ARBRE A " << A.getSommet() << endl;
+	cout << "-----------" << endl;
+	vector<ArbreB*> arbres;
+	creer_arbres(arbres, sommets);
+	int i = 1;
+	arbres[i]->affichage_infixe(arbres[i]);
+	arbres[i]->afficher_arb(0,0,arbres[i]);
+	//reverse(arbres.begin(), arbres.end(), comparaison_arbres);
+	//afficher_arbres(arbres);
+	
 
 	return 0;
 }
