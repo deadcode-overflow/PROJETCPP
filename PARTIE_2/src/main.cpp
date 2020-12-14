@@ -7,6 +7,7 @@
 #include <map>
 #include <algorithm>
 #include <array>
+#include <list>
 
 using namespace std;
 
@@ -36,38 +37,28 @@ int main(void) {
 	cout << "FEUILLES" << endl;
 	afficher_arbres_infixe(arbres);
 
-	vector<ArbreB*> huffman;
+	list<ArbreB*> huffman;
 	size_t taille = arbres.size();
 	size_t index = 1;
 	for(size_t i = 1; i <= taille/2; i++) {
 		ArbreB r;
-		cout << "A1 ET A2" << endl;
-		arbres[arbres.size()-index]->affichage_infixe(arbres[arbres.size()-index]);
-		arbres[arbres.size()-(index+1)]->affichage_infixe(arbres[arbres.size()-(index+1)]);
 		if(taille%2 == 1 && i == taille/2) {
 			r.fusionner_huffman(arbres[arbres.size()-index], arbres[arbres.size()-(index+1)]);
+			r.afficher_arbo(0,0,&r);
 			huffman.push_back(&r);
 			huffman.push_back(new ArbreB(arbres[0]));
 		}
 		else {
 			r.fusionner_huffman(arbres[arbres.size()-index], arbres[arbres.size()-(index+1)]);
+			cout << "	RESULTAT DE LA FUSION" << endl;
+			r.afficher_arbo(0,0,&r);
+			r.affichage_infixe(&r);
 			huffman.push_back(new ArbreB(&r));
 		}
 		index+=2;
-		cout << "A STOCKE " << 2 << endl;
-		if(i >= 3){
-			huffman[2]->affichage_infixe(huffman[2]);
-			huffman[2]->afficher_arbo(0,0,huffman[2]);
-		}
-		cout << "A STOCKE " << 3 << endl;
-		if(i >= 4){
-			huffman[3]->affichage_infixe(huffman[3]);
-			huffman[3]->afficher_arbo(0,0,huffman[3]);
-		}
 	}
-	cout << "HUFFMAN" << endl;
+	cout << "	HUFFMAN" << endl;
 	afficher_arbres_arbo(huffman);
-	afficher_arbres_infixe(huffman);
 
 	//ArbreB* huffman;
 	//creer_arbres(huffman, arbres);

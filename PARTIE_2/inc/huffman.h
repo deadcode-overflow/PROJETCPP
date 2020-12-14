@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ int comparaison_sommets(Sommet& a,Sommet& b);
 void afficher_sommets(vector<Sommet>& sommets);
 void afficher_arbres_infixe(vector<ArbreB*>& arbres);
 void afficher_arbres_arbo(vector<ArbreB*>& arbres);
-double taille_(vector<ArbreB>& feuilles);
-void creer_arbres(ArbreB* huffman, vector<ArbreB>& feuilles);
+void afficher_arbres_infixe(list<ArbreB*>& arbres);
+void afficher_arbres_arbo(list<ArbreB*>& arbres);
+//void creer_arbres(ArbreB* huffman, vector<ArbreB>& feuilles);
 #endif

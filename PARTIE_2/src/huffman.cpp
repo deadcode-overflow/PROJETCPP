@@ -7,6 +7,7 @@
 #include <limits>
 #include <vector>
 #include <map>
+#include <list>
 
 using namespace std;
 
@@ -101,6 +102,24 @@ void afficher_arbres_arbo(vector<ArbreB*>& arbres) {
 	for(size_t i=0; i < arbres.size(); i++) {
 		cout << "index " << i << endl;
 		arbres[i]->afficher_arbo(0,0,arbres[i]);
+	}
+}
+
+void afficher_arbres_infixe(list<ArbreB*>& arbres) {
+	int ix = 0;
+	for(auto const& i : arbres) {
+		cout << "index " << ix << endl;
+		i->affichage_infixe(i);
+		ix++;
+	}
+}
+
+void afficher_arbres_arbo(list<ArbreB*>& arbres) {
+	int ix = 0;
+	for(auto const& i : arbres) {
+		cout << "index " << ix << endl;
+		i->afficher_arbo(0,0,i);
+		ix++;
 	}
 }
 
