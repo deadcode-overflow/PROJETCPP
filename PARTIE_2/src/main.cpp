@@ -19,14 +19,14 @@ int main(void) {
 	vector<string> texte_clair = copier_texte(fichier);
 	map<char, int> frequence_alphabet;
 	calculer_frequence_alphabet(texte_clair, frequence_alphabet);
-	afficher_frequence_alphabet(frequence_alphabet);
+	//afficher_frequence_alphabet(frequence_alphabet);
 	afficher_texte(texte_clair);
 
 	vector<Sommet> sommets;
 	creer_sommets(sommets, frequence_alphabet);
 	sort(sommets.begin(), sommets.end(), comparaison_sommets);
 	reverse(sommets.begin(),sommets.end());
-	afficher_sommets(sommets);
+	//afficher_sommets(sommets);
 
 	
 	vector<ArbreB*> arbres;
@@ -34,7 +34,7 @@ int main(void) {
 		arbres.push_back(new ArbreB(s));
 	}
 	cout << "FEUILLES" << endl;
-	afficher_arbres(arbres);
+	//afficher_arbres(arbres);
 
 	vector<ArbreB*> huffman;
 	size_t taille = arbres.size();
@@ -42,11 +42,20 @@ int main(void) {
 
 	for(size_t i = 1; i < taille/2; i++) {
 		ArbreB r;
+		cout << "A1 ET A2" << endl;
+		arbres[arbres.size()-index]->affichage_infixe(arbres[arbres.size()-index]);
+		arbres[arbres.size()-index]->afficher_arb(0,0,arbres[arbres.size()-index]);
+		arbres[arbres.size()-(index+1)]->affichage_infixe(arbres[arbres.size()-(index+1)]);
+		arbres[arbres.size()-(index+1)]->afficher_arb(0,0,arbres[arbres.size()-(index+1)]);
 		r.fusionner(arbres[arbres.size()-index], arbres[arbres.size()-(index+1)]);
+		cout << "A FUSION" << endl;
+		r.affichage_infixe(&r);
+		r.afficher_arb(0,0,&r);
 		huffman.push_back(new ArbreB(&r));
 		index+=2;
-		huffman[0]->affichage_infixe(huffman[0]);
-		huffman[0]->afficher_arb(0,0,huffman[0]);
+		cout << "A STOCKE" << endl;
+		huffman[i-1]->affichage_infixe(huffman[i-1]);
+		huffman[i-1]->afficher_arb(0,0,huffman[i-1]);
 	}
 	cout << "HUFFMAN" << endl;
 	afficher_arbres(huffman);

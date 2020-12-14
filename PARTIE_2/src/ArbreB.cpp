@@ -68,7 +68,7 @@ void ArbreB::copier(ArbreB* copie, ArbreB* A) {
 	if(A->gauche) {
 		copie->gauche = new ArbreB(A->gauche->racine);
 	}
-	if (A->droite) {
+	if(A->droite) {
 		copie->droite = new ArbreB(A->droite->racine);
 	}
 
