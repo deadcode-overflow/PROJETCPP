@@ -62,17 +62,32 @@ ArbreB::~ArbreB() {
 void ArbreB::copier(ArbreB* copie, ArbreB* A) {
 	if(!A) return;
 
-	copie->racine = A->racine;
-	
-	
-	if(A->gauche) {
-		copie->gauche = new ArbreB(A->gauche->racine);
+	if(!precedent)
+		precedent = new ArbreB(racine,this);
+
+	if(precedent != this) {
+		delete precedent;
+		precedent = new ArbreB(racine, this);
 	}
-	if(A->droite) {
-		copie->droite = new ArbreB(A->droite->racine);
+	
+	if(!copie->precedent)
+		copie->precedent = new ArbreB(A->racine);
+
+	if(copie->precedent != precedent) {
+		delete copie->precedent;
+		copie->precedent = new ArbreB(A->precedent->racine);
 	}
 
-	copie->precedent = new ArbreB(A->precedent->racine);
+	copie->racine = A->racine;
+
+	if(A->gauche) {
+		delete copie->gauche;
+		copie->gauche = new ArbreB(A->gauche->racine, copie->precedent);
+	}
+	if(A->droite) {
+		delete copie->droite;
+		copie->droite = new ArbreB(A->droite->racine, copie->precedent);
+	}
 
 	copier(copie->gauche, A->gauche);
 	copier(copie->droite, A->droite);
@@ -542,7 +557,7 @@ void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
  *
  * description : affiche de manière recursive l'arbre binaire en incrémentant la hauteur de 1
 */
-void ArbreB::afficher_arb(int hauteur, int cote, ArbreB* A) {
+void ArbreB::afficher_arbo(int hauteur, int cote, ArbreB* A) {
     if (A == nullptr)  {
     	return;
     }
@@ -564,8 +579,8 @@ void ArbreB::afficher_arb(int hauteur, int cote, ArbreB* A) {
         }
     }
 
-    afficher_arb(hauteur + 1, 0, A->getGauche());
-    afficher_arb(hauteur + 1, 1, A->getDroite());
+    afficher_arbo(hauteur + 1, 0, A->getGauche());
+    afficher_arbo(hauteur + 1, 1, A->getDroite());
 }
 
 /**
@@ -652,7 +667,7 @@ ArbreB& ArbreB::setFreq(ArbreB* A1, ArbreB* A2) {
 	return *this;
 }
 
-ArbreB& ArbreB::fusionner(ArbreB* A1, ArbreB* A2) {
+ArbreB& ArbreB::fusionner_huffman(ArbreB* A1, ArbreB* A2) {
 	if(racine.getChar() != 0)
 		return *this;
 

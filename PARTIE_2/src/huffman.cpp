@@ -90,25 +90,25 @@ void afficher_sommets(vector<Sommet>& sommets) {
 		cout << s << endl;
 }
 
-void afficher_arbres(vector<ArbreB>& arbres) {
-	for(ArbreB& arbre : arbres) {
-		arbre.affichage_infixe(&arbre);
-		arbre.afficher_arb(0,0,&arbre);
-	}
-}
-
-void afficher_arbres(vector<ArbreB*>& arbres) {
+void afficher_arbres_infixe(vector<ArbreB*>& arbres) {
 	for(size_t i=0; i < arbres.size(); i++) {
+		cout << "index " << i << endl;
 		arbres[i]->affichage_infixe(arbres[i]);
-		arbres[i]->afficher_arb(0,0,arbres[i]);
 	}
 }
 
-void creer_A(ArbreB* A, ArbreB* A1, ArbreB* A2) {
+void afficher_arbres_arbo(vector<ArbreB*>& arbres) {
+	for(size_t i=0; i < arbres.size(); i++) {
+		cout << "index " << i << endl;
+		arbres[i]->afficher_arbo(0,0,arbres[i]);
+	}
+}
+
+/*void creer_A(ArbreB* A, ArbreB* A1, ArbreB* A2) {
 	A->ajouterGauche(A1, A);
 	A->ajouterDroite(A2, A);
 	A->setFreq(A1, A2);
-}
+}*/
 
 /*void creer_arbres(ArbreB* huffman, vector<ArbreB>& feuilles) {
 	;
