@@ -674,6 +674,8 @@ ArbreB& ArbreB::fusionner_huffman(ArbreB* A1, ArbreB* A2) {
 	gauche = new ArbreB(A1);
 	droite = new ArbreB(A2);
 	precedent = this;
+	cout << A1->racine.getFreq() << endl;
+	cout << A2->racine.getFreq() << endl;
 	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
 
 	return *this;

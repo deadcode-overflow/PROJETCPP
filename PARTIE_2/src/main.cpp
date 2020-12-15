@@ -30,38 +30,64 @@ int main(void) {
 	//afficher_sommets(sommets);
 
 	
-	vector<ArbreB*> arbres;
+	vector<ArbreB*> feuilles;
 	for(Sommet& s : sommets) {
-		arbres.push_back(new ArbreB(s));
+		feuilles.push_back(new ArbreB(s));
 	}
-	cout << "FEUILLES" << endl;
-	afficher_arbres_infixe(arbres);
+	afficher_arbres_infixe(feuilles);
 
 	list<ArbreB*> huffman;
-	size_t taille = arbres.size();
+	size_t taille = feuilles.size();
 	size_t index = 1;
-	for(size_t i = 1; i <= taille/2; i++) {
+	size_t i;
+	for(i = 1; i <= taille/2; i++) {
 		ArbreB r;
 		if(taille%2 == 1 && i == taille/2) {
-			r.fusionner_huffman(arbres[arbres.size()-index], arbres[arbres.size()-(index+1)]);
-			r.afficher_arbo(0,0,&r);
-			huffman.push_back(&r);
-			huffman.push_back(new ArbreB(arbres[0]));
+			r.fusionner_huffman(feuilles[feuilles.size()-index], feuilles[feuilles.size()-(index+1)]);
+			huffman.push_back(new ArbreB(&r));
+			huffman.push_back(new ArbreB(feuilles[0]));
 		}
 		else {
-			r.fusionner_huffman(arbres[arbres.size()-index], arbres[arbres.size()-(index+1)]);
-			cout << "	RESULTAT DE LA FUSION" << endl;
-			r.afficher_arbo(0,0,&r);
-			r.affichage_infixe(&r);
+			r.fusionner_huffman(feuilles[feuilles.size()-index], feuilles[feuilles.size()-(index+1)]);
 			huffman.push_back(new ArbreB(&r));
 		}
 		index+=2;
 	}
-	cout << "	HUFFMAN" << endl;
-	afficher_arbres_arbo(huffman);
+	//afficher_arbres_arbo(huffman);
+	//huffman.front()->afficher_arbo(0,0,huffman.front());
+	//huffman.front()->affichage_infixe(huffman.front());
 
+	while(huffman.size() != 1) {
+		ArbreB r;
+		cout << "\tDERNIER" << endl;
+		ArbreB* dernier = new ArbreB(huffman.front());
+		dernier->afficher_arbo(0,0,dernier);
+		dernier->affichage_infixe(dernier);
+		//cout << "2" << endl;
+		huffman.pop_front();
+		cout << "\tAVANT DERNIER" << endl;
+		ArbreB* avant_dernier =  new ArbreB(huffman.front());
+		avant_dernier->afficher_arbo(0,0,avant_dernier);
+		avant_dernier->affichage_infixe(avant_dernier);
+		//cout << "4" << endl;
+		huffman.pop_front();
+		cout << "\tFUSION" << endl;
+		cout << dernier->getSommet().getFreq() << endl;
+		cout << avant_dernier->getSommet().getFreq() << endl;
+		r.fusionner_huffman(dernier, avant_dernier);
+		r.afficher_arbo(0,0,&r);
+		r.affichage_infixe(&r);		
+		cout << "\tHUFFMAN" << endl;
+		huffman.push_back(new ArbreB(&r));
+		huffman.back()->afficher_arbo(0,0,huffman.back());
+		huffman.back()->affichage_infixe(huffman.back());
+		delete avant_dernier;
+		delete dernier;
+	}
+	//afficher_arbres_arbo(huffman);
+	
 	//ArbreB* huffman;
-	//creer_arbres(huffman, arbres);
+	//creer_arbres(huffman, feuilles);
 
 	return 0;
 }

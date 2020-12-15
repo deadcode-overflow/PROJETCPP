@@ -18,6 +18,7 @@ string choisir_texte() {
 	string nom_fichier;
 	cout << "Entrez le nom du fichier texte : " << endl;
 	cin >> nom_fichier;
+	cout << endl;
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return nom_fichier;
@@ -62,12 +63,13 @@ void calculer_frequence_alphabet(vector<string>& texte, map<char, int>& frequenc
 }
 
 void afficher_frequence_alphabet(map<char, int>& frequence_alphabet) {
-	for(int  i = 0; i < ALPHABET_LATIN; i++)
+	for(int  i = 0; i < 26; i++)
 		cout << alphabet_latin[i] << " " << frequence_alphabet[alphabet_latin[i]] << endl;
 	cout << endl;
 }
 
 void afficher_texte(vector<string>& texte) {
+	cout << "\t TEXTE ORIGINAL" << endl;
 	for(string ligne : texte)
 		cout << ligne << endl;
 	cout << endl;
@@ -92,6 +94,7 @@ void afficher_sommets(vector<Sommet>& sommets) {
 }
 
 void afficher_arbres_infixe(vector<ArbreB*>& arbres) {
+	cout << "\tFEUILLES" << endl;
 	for(size_t i=0; i < arbres.size(); i++) {
 		cout << "index " << i << endl;
 		arbres[i]->affichage_infixe(arbres[i]);
@@ -99,6 +102,7 @@ void afficher_arbres_infixe(vector<ArbreB*>& arbres) {
 }
 
 void afficher_arbres_arbo(vector<ArbreB*>& arbres) {
+	cout << "\tFEUILLES" << endl;
 	for(size_t i=0; i < arbres.size(); i++) {
 		cout << "index " << i << endl;
 		arbres[i]->afficher_arbo(0,0,arbres[i]);
@@ -106,6 +110,7 @@ void afficher_arbres_arbo(vector<ArbreB*>& arbres) {
 }
 
 void afficher_arbres_infixe(list<ArbreB*>& arbres) {
+	cout << "\tHUFFMAN" << endl;
 	int ix = 0;
 	for(auto const& i : arbres) {
 		cout << "index " << ix << endl;
@@ -115,6 +120,7 @@ void afficher_arbres_infixe(list<ArbreB*>& arbres) {
 }
 
 void afficher_arbres_arbo(list<ArbreB*>& arbres) {
+	cout << "\tHUFFMAN" << endl;
 	int ix = 0;
 	for(auto const& i : arbres) {
 		cout << "index " << ix << endl;
