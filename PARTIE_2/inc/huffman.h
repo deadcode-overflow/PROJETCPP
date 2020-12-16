@@ -3,7 +3,6 @@
 
 #include "../inc/ArbreB.h"
 #include "../inc/Sommet.h"
-
 #include <string>
 #include <vector>
 #include <map>
@@ -15,14 +14,12 @@ string choisir_texte();
 void verification_fichier(fstream& fichier, string nom);
 vector<string> copier_texte(fstream& fichier);
 void calculer_frequence_alphabet(vector<string>& texte, map<char, int>& frequence_alphabet);
-void afficher_frequence_alphabet(map<char, int>& frequence_alphabet);
 void afficher_texte(vector<string>& texte);
 void creer_sommets(vector<Sommet>& sommets, map<char, int>& frequence_alphabet);
 int comparaison_sommets(Sommet& a,Sommet& b);
-void afficher_sommets(vector<Sommet>& sommets);
-void afficher_arbres_infixe(vector<ArbreB*>& arbres);
-void afficher_arbres_arbo(vector<ArbreB*>& arbres);
 void afficher_arbres_infixe(list<ArbreB*>& arbres);
 void afficher_arbres_arbo(list<ArbreB*>& arbres);
-//void creer_arbres(ArbreB* huffman, vector<ArbreB>& feuilles);
+void codage_alphabet(ArbreB* A, map<char, string>& code_alphabet);
+void afficher_code_alphabet(map<char, string>& code_alphabet);
+void huffman();
 #endif

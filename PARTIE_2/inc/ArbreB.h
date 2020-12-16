@@ -46,10 +46,8 @@ class ArbreB : public Sommet
 		int nombre_element(ArbreB* A); //calcule le nombre d'élément dans l'arbre
 		ArbreB* min(ArbreB* A); //retourne l'arbre (feuille) minimal de l'arbre
 		ArbreB* max(ArbreB* A); //retourne l'arbre (feuille) maximal de l'arbre
-		void copier(ArbreB* A1, ArbreB* A2); //sert pour constructeur copie
+		void copier(ArbreB* destination, ArbreB* source, Sommet& racine_destination); //sert pour constructeur copie
 		void recupererGauche(ArbreB* Ag, ArbreB* A); //recupere le sous-arbre gauche d'un arbre binaire
 		void recupererDroite(ArbreB* Ad, ArbreB* A); //recupere le sous-arbre droit d'un arbre binaire
-		void ajouterGauche(ArbreB* Ag, ArbreB* A);
-		void ajouterDroite(ArbreB* Ad, ArbreB* A);
 };
 #endif

@@ -55,42 +55,28 @@ ArbreB::~ArbreB() {
  * usage : copie d'un arbre binaire
  * entrée :
  *		un pointeur @copie sur un objet de type ArbreB qui représente l'arbre dans lequel on copie
- *		un pointeur @A sur un objet de type ArbreB qui représente l'arbre que l'on copie
+ *		un pointeur @A sur un objet de type ArbreB qui représente l'arbre copier
+ *		une référence @racine_copie sur le sommet de la racine de l'arbre dans lequel on copie
  *
  * description : copie un arbre binaire dans un autre arbre bianire de manière recursive.		
 */
-void ArbreB::copier(ArbreB* copie, ArbreB* A) {
-	if(!A) return;
-
-	if(!precedent)
-		precedent = new ArbreB(racine,this);
-
-	if(precedent != this) {
-		delete precedent;
-		precedent = new ArbreB(racine, this);
+void ArbreB::copier(ArbreB* copie, ArbreB* A, Sommet& racine_copie) {
+	if(A) {
+		if(racine_copie == copie->racine)
+			copie->precedent = copie;
+		
+		copie->racine = A->racine;
+		if(A->gauche) {
+			copie->gauche = new ArbreB();
+			copie->gauche->precedent = copie;
+		}
+		if(A->droite) {
+			copie->droite = new ArbreB();
+			copie->droite->precedent = copie;
+		}
+		copier(copie->gauche, A->gauche, racine_copie);
+		copier(copie->droite, A->droite, racine_copie); 
 	}
-	
-	if(!copie->precedent)
-		copie->precedent = new ArbreB(A->racine);
-
-	if(copie->precedent != precedent) {
-		delete copie->precedent;
-		copie->precedent = new ArbreB(A->precedent->racine);
-	}
-
-	copie->racine = A->racine;
-
-	if(A->gauche) {
-		delete copie->gauche;
-		copie->gauche = new ArbreB(A->gauche->racine, copie->precedent);
-	}
-	if(A->droite) {
-		delete copie->droite;
-		copie->droite = new ArbreB(A->droite->racine, copie->precedent);
-	}
-
-	copier(copie->gauche, A->gauche);
-	copier(copie->droite, A->droite);
 }
 
 /**
@@ -101,7 +87,7 @@ void ArbreB::copier(ArbreB* copie, ArbreB* A) {
 */
 ArbreB::ArbreB(ArbreB* A) {
 	ArbreB* tmp = this;
-	copier(tmp, A);
+	copier(tmp, A, tmp->racine);
 }
 
 /**
@@ -142,6 +128,18 @@ ArbreB* ArbreB::getGauche() {
 */
 ArbreB* ArbreB::getPrecedent() {
 	return precedent;
+}
+
+/**
+ * usage : setter de @freq
+ * retour : nouvelle @freq de l'arbre courant qui est l'addition des deux fréquences des ses sous-arbres
+ *
+ * description : permet de modifier la frequence de l'arbre binaire courant lors de la fusion de deux arbres binaires
+ * pour le codage de Huffman
+*/
+ArbreB& ArbreB::setFreq(ArbreB* A1, ArbreB* A2) {
+	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
+	return *this;
 }
 
 /**
@@ -409,7 +407,7 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
  * entrée : une référence @s du sommet à rechercher 
  * retour : le sommet trouvé dans l'arbre 
  *
- * description : effectue un parcours d'arbre à l'aide d'un pointeur et une fois le sommet trouvé on le renvoie .
+ * description : effectue un parcours d'arbre à l'aide d'un pointeur et une fois le sommet trouvé, on le renvoie
 */
 Sommet& ArbreB::rechercher(Sommet& s) {
 	ArbreB* tmp = this;
@@ -537,7 +535,8 @@ void ArbreB::recupererDroite(ArbreB* Ad, ArbreB* A) {
  * 		l'arbre binaire @Ad qui récupere le sous-arbre droit,
  * 		l'arbre bianire @A dans lequel on veut récupérer son sous-arbre gauche et son sous-arbre droit
  *
- * description : utilisation des fonction ajouterGauche et ajouterDroite pour récupérer respectivement le sous-arbre gauche et le sous-arbre droit de l'arbre @A
+ * description : utilisation des fonctions recupererGauche() et recupererDroite(),
+ * pour récupérer respectivement le sous-arbre gauche et le sous-arbre droit de l'arbre @A
 */
 void ArbreB::decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A) {
 	if(!A) {
@@ -568,19 +567,27 @@ void ArbreB::afficher_arbo(int hauteur, int cote, ArbreB* A) {
         }
         if (hauteur)    {
             if (cote == 0) {
-                cout << "├─ " << A->getSommet().getChar() << endl;
+				if(A->racine.getChar() != 0)
+                	cout << "├─ " << A->racine.getChar() << ": " << A->racine.getFreq() << endl;
+					else
+						cout << "├─ " << A->racine.getChar() << endl;
+					
             }
             else {
-                cout << "└─ " << A->getSommet().getChar() << endl;
+				if(A->racine.getChar() != 0)
+               		cout << "└─ " << A->racine.getChar() << ": " << A->racine.getFreq() << endl;
+				else
+					cout << "└─ " << A->racine.getChar() << endl;
+				
             }
         }
         else {
-            cout << A->getSommet().getChar() << endl;
+            cout << A->racine.getChar() << endl;
         }
     }
 
-    afficher_arbo(hauteur + 1, 0, A->getGauche());
-    afficher_arbo(hauteur + 1, 1, A->getDroite());
+    afficher_arbo(hauteur + 1, 0, A->gauche);
+    afficher_arbo(hauteur + 1, 1, A->droite);
 }
 
 /**
@@ -641,7 +648,8 @@ int ArbreB::hauteur(ArbreB* A, int hg, int hd) {
  * entrée : un pointeur sur l'arbre binaire dont on veut déterminer le nombre de sommet
  * retour : le nombre de sommet dans l'abre bianire
  *
- * description : on determine le nombre de sommet de manière recursive en incrémentant de 1 à chaque fois que l'on passe d'un sommet de l'arbre à un autre.
+ * description : on determine le nombre de sommet de manière recursive en incrémentant de 1 à chaque fois que l'on
+ * passe d'un sommet de l'arbre à un autre.
 */
 int ArbreB::nombre_element(ArbreB* A) {
 
@@ -652,30 +660,21 @@ int ArbreB::nombre_element(ArbreB* A) {
 	return 1 + nombre_element(A->gauche) + nombre_element(A->droite);
 }
 
-void ArbreB::ajouterGauche(ArbreB* A1, ArbreB* A) {
-	if(A1)
-		A->gauche = new ArbreB(A1->getSommet(),A);
-}
-
-void ArbreB::ajouterDroite(ArbreB* A2, ArbreB* A) {
-	if(A2)
-		A->droite = new ArbreB(A2->getSommet(),A);
-}
-
-ArbreB& ArbreB::setFreq(ArbreB* A1, ArbreB* A2) {
-	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
-	return *this;
-}
-
+/**
+ * usage : déterminer le nombre de sommet dans un arbre binaire
+ * entrée : un pointeur sur l'arbre binaire dont on veut déterminer le nombre de sommet
+ * retour : le nombre de sommet dans l'abre bianire
+ *
+ * description : on determine le nombre de sommet de manière recursive en incrémentant de 1 à chaque fois que l'on
+ * passe d'un sommet de l'arbre à un autre.
+*/
 ArbreB& ArbreB::fusionner_huffman(ArbreB* A1, ArbreB* A2) {
 	if(racine.getChar() != 0)
 		return *this;
 
 	gauche = new ArbreB(A1);
 	droite = new ArbreB(A2);
-	precedent = this;
-	cout << A1->racine.getFreq() << endl;
-	cout << A2->racine.getFreq() << endl;
+	precedent = new ArbreB(racine);
 	racine.setFreq(A1->racine.getFreq() + A2->racine.getFreq());
 
 	return *this;
