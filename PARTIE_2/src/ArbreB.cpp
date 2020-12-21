@@ -661,12 +661,12 @@ int ArbreB::nombre_element(ArbreB* A) {
 }
 
 /**
- * usage : déterminer le nombre de sommet dans un arbre binaire
- * entrée : un pointeur sur l'arbre binaire dont on veut déterminer le nombre de sommet
- * retour : le nombre de sommet dans l'abre bianire
+ * usage : fusionne deux arbre binaire
+ * entrée : les deux arbres bianire à fusionner
+ * retour : l'arbre binaire fusionné
  *
- * description : on determine le nombre de sommet de manière recursive en incrémentant de 1 à chaque fois que l'on
- * passe d'un sommet de l'arbre à un autre.
+ * description : on créer un nouvelle arbre binaire à la racine des deux arbres bianire que l'on veut fusionner
+ * et on retourne ce nouvelle arbre.
 */
 ArbreB& ArbreB::fusionner_huffman(ArbreB* A1, ArbreB* A2) {
 	if(racine.getChar() != 0)

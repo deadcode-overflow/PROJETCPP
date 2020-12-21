@@ -50,7 +50,7 @@ ArbreB.o: ArbreB.h Sommet.h
 clean:
 	@rm -fv *.o
 	@rm -rfv $(DIR_EXEC)/*
-	@rm -rfv $(DIR_OBJ)/*
 	@rm -dfv $(DIR_EXEC)
+	@rm -rfv $(DIR_OBJ)/*
 	@rm -dfv $(DIR_OBJ)
 	@echo "\nproject clean"

@@ -21,5 +21,6 @@ void afficher_arbres_infixe(list<ArbreB*>& arbres);
 void afficher_arbres_arbo(list<ArbreB*>& arbres);
 void codage_alphabet(ArbreB* A, map<char, string>& code_alphabet);
 void afficher_code_alphabet(map<char, string>& code_alphabet);
+void afficher_texte_code(vector<string>& texte, map<char, string>& code_alphabet);
 void huffman();
 #endif

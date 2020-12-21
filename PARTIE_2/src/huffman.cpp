@@ -12,8 +12,7 @@
 
 using namespace std;
 
-#define ALPHABET_LATIN 26
-const char alphabet_latin[ALPHABET_LATIN] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+const char alphabet_latin[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
  
  /**
  * usage : choisir le fichier texte sur lequel appliquer le codage de huffman
@@ -237,6 +236,44 @@ void afficher_code_alphabet(map<char, string>& code_alphabet) {
 }
 
 /**
+ * usage : savoir si un caractère fait parti des lettres de l'alphabet
+ * entrée : le caractère à évaluer et un tableau de caractère qui représente les lettres de l'alphabet
+ * retour : un booléen
+ * description : retourne vrai si le caractère et dans l'alphabet, sinon retourne faux
+*/
+bool in(char c, const char* alphabet_latin) {
+	for(int i = 0; i < 26; i++) {
+		if(c == alphabet_latin[i])
+			return true;
+	}
+	return false;
+}
+
+/**
+ * usage : afficher un texte codé
+ * entrée : un vecteur de string qui représente le texte et une map de char et de string qui représente
+ * le code de chaque lettre de l'alphabet
+ *
+ * description : affiche le texte codé
+*/
+void afficher_texte_code(vector<string>& texte, map<char, string>& code_alphabet) {
+	cout << "\t TEXTE CODÉ" << endl;
+	for(string ligne : texte) {
+		for(size_t i = 0; i < ligne.size(); i++) {
+			char c = ligne.at(i);
+			if(code_alphabet[c] == "" && code_alphabet[c-32] == "")
+				cout << "";
+			if(in(c, alphabet_latin))
+				cout << code_alphabet[c];
+			else
+				cout << code_alphabet[c-32];
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
+
+/**
  * usage : prendre un texte et le coder avec l'algorithme de huffman
  *
  * description :
@@ -308,4 +345,5 @@ void huffman() {
 	map<char, string> code_alphabet;
 	codage_alphabet(huffman.front(), code_alphabet);
 	afficher_code_alphabet(code_alphabet);
+	afficher_texte_code(texte_clair, code_alphabet);
 }
