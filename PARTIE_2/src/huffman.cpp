@@ -274,6 +274,30 @@ void afficher_texte_code(vector<string>& texte, map<char, string>& code_alphabet
 }
 
 /**
+ * usage : copier le texte codé dans un fichier texte
+ * entrée : le fichier texte, un vecteur de string qui représente le texte à copier
+ * et une map de char/string qui représente le code de chaque lettre de l'alphabet
+ *
+ * description : copie bit par bit le code du texte dans un fichier texte
+*/
+void copier_resultat(fstream& fichier, vector<string>& texte, map<char, string>& code_alphabet) {
+	for(string ligne : texte) {
+		for(size_t i = 0; i < ligne.size(); i++) {
+			char c = ligne.at(i);
+			if(code_alphabet[c] == "" && code_alphabet[c-32] == "")
+				fichier << "";
+			if(in(c, alphabet_latin))
+				fichier << code_alphabet[c];
+			else
+				fichier << code_alphabet[c-32];
+		}
+		fichier << endl;
+	}
+	fichier << endl;
+	fichier.close();
+}
+
+/**
  * usage : prendre un texte et le coder avec l'algorithme de huffman
  *
  * description :
@@ -297,6 +321,7 @@ void huffman() {
 	verification_fichier(fichier, nom_fichier);
 
 	vector<string> texte_clair = copier_texte(fichier);
+	fichier.close();
 	map<char, int> frequence_alphabet;
 	calculer_frequence_alphabet(texte_clair, frequence_alphabet);
 	afficher_texte(texte_clair);
@@ -346,4 +371,8 @@ void huffman() {
 	codage_alphabet(huffman.front(), code_alphabet);
 	afficher_code_alphabet(code_alphabet);
 	afficher_texte_code(texte_clair, code_alphabet);
+	fstream fichier_resultat("resultat_crypte.txt", ios::out | ios::trunc);
+	verification_fichier(fichier_resultat, "resultat_crypte.txt");
+	copier_resultat(fichier_resultat, texte_clair, code_alphabet);
+	fichier_resultat.close();
 }

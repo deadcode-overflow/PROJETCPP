@@ -49,6 +49,7 @@ ArbreB.o: ArbreB.h Sommet.h
 # Supprime les dossiers générés et leur contenu
 clean:
 	@rm -fv *.o
+	@rm -fv resultat_crypte.txt
 	@rm -rfv $(DIR_EXEC)/*
 	@rm -dfv $(DIR_EXEC)
 	@rm -rfv $(DIR_OBJ)/*
