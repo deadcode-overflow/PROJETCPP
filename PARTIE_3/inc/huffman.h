@@ -10,7 +10,7 @@
 
 using namespace std;
 
-string choisir_texte();
+string choisir_texte_a_crypter();
 void verification_fichier(fstream& fichier, string nom);
 vector<string> copier_texte(fstream& fichier);
 void calculer_frequence_alphabet(vector<string>& texte, map<char, int>& frequence_alphabet);
@@ -21,8 +21,10 @@ void afficher_arbres_infixe(list<ArbreB*>& arbres);
 void afficher_arbres_arbo(list<ArbreB*>& arbres);
 void codage_alphabet(ArbreB* A, map<char, string>& code_alphabet);
 void afficher_code_alphabet(map<char, string>& code_alphabet);
-void afficher_texte_code(vector<string>& texte, map<char, string>& code_alphabet);
-void copier_resultat(fstream& fichier, vector<string>& texte, map<char, string>& code_alphabet);
+void cryptage(vector<string>& texte, map<char, string>& code_alphabet);
+void copier_resultat_cryptage(fstream& fichier, vector<string>& texte, map<char, string>& code_alphabet);
+string choisir_texte_a_decrypter();
 void decryptage(vector<string>& texte_crypte, list<ArbreB*>& huffman);
+void copier_resultat_decryptage(fstream& fichier, vector<string>& texte_crypte, list<ArbreB*>& huffman);
 void huffman();
 #endif

@@ -28,9 +28,9 @@ const char alphabet_latin[NOMBRE_CARACTERE] = {
  * 		-retourne le nom du fichier entré par l'utilisateur
  * 
 */
-string choisir_texte() {
+string choisir_texte_a_crypter() {
 	string nom_fichier;
-	cout << "Entrez le nom du fichier texte : " << endl;
+	cout << "Entrez le nom du fichier texte à crypter : " << endl;
 	cin >> nom_fichier;
 	cout << endl;
 	std::cin.clear();
@@ -260,7 +260,7 @@ bool in(char c, const char* alphabet_latin) {
  *
  * description : affiche le texte codé
 */
-void afficher_texte_code(vector<string>& texte, map<char, string>& code_alphabet) {
+void cryptage(vector<string>& texte, map<char, string>& code_alphabet) {
 	cout << "\t RESULTAT DU CRYPTAGE" << endl;
 	for(string ligne : texte) {
 		for(size_t i = 0; i < ligne.size(); i++) {
@@ -294,6 +294,25 @@ void copier_resultat_cryptage(fstream& fichier, vector<string>& texte, map<char,
 		fichier << endl;
 	}
 	fichier << endl;
+}
+
+/**
+ * usage : choisir le fichier texte sur lequel appliquer l'algorythme de decryptage du codage de huffman
+ * retour : le nom du fichier
+ *
+ * description :
+ * 		-propose à l'utilisateur d'entrer le nom d'un fichier texte
+ * 		-retourne le nom du fichier entré par l'utilisateur
+ * 
+*/
+string choisir_texte_a_decrypter() {
+	string nom_fichier;
+	cout << "Entrez le nom du fichier texte a decrypter : " << endl;
+	cin >> nom_fichier;
+	cout << endl;
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	return nom_fichier;
 }
 
 void decryptage(vector<string>& texte_crypte, list<ArbreB*>& huffman) {
@@ -364,14 +383,14 @@ void copier_resultat_decryptage(fstream& fichier, vector<string>& texte_crypte, 
  * 		-affiche le code de chaque lettre de l'alphabet
 */
 void huffman() {
-	string nom_fichier = choisir_texte();
-	fstream fichier(nom_fichier.c_str(), ios::in);
-	verification_fichier(fichier, nom_fichier);
+	string nom_fichier_a_crypter = choisir_texte_a_crypter();
+	fstream fichier_a_crypter(nom_fichier_a_crypter.c_str(), ios::in);
+	verification_fichier(fichier_a_crypter, nom_fichier_a_crypter);
 
-	vector<string> texte_clair = copier_texte(fichier);
-	fichier.close();
+	vector<string> texte_clair = copier_texte(fichier_a_crypter);
 	map<char, int> frequence_alphabet;
 	calculer_frequence_alphabet(texte_clair, frequence_alphabet);
+	fichier_a_crypter.close();
 
 	vector<Sommet> sommets;
 	creer_sommets(sommets, frequence_alphabet);
@@ -421,18 +440,22 @@ void huffman() {
 	afficher_code_alphabet(code_alphabet);
 	afficher_arbres_arbo(huffman);
 	afficher_texte(texte_clair);
-	afficher_texte_code(texte_clair, code_alphabet);
-	fstream fichier_resultat("resultat_cryptage.txt", ios::out | ios::trunc);
-	verification_fichier(fichier_resultat, "resultat_cryptage.txt");
-	copier_resultat_cryptage(fichier_resultat, texte_clair, code_alphabet);
-	fichier_resultat.close();
-	fstream fichier_crypte("resultat_cryptage.txt", ios::in);
-	verification_fichier(fichier_crypte, "resultat_cryptage.txt");
-	vector<string> texte_crypte = copier_texte(fichier_crypte);
-	decryptage(texte_crypte, huffman);
-	fstream fichier_decrypte("resultat_decryptage.txt", ios::out | ios::trunc);
-	verification_fichier(fichier_decrypte, "resultat_decryptage.txt");
-	copier_resultat_decryptage(fichier_decrypte, texte_crypte, huffman);
-	fichier_decrypte.close();
-	fichier_crypte.close();
+	cryptage(texte_clair, code_alphabet);
+	
+	fstream fichier_resultat_cryptage("resultat_cryptage.txt", ios::out | ios::trunc);
+	verification_fichier(fichier_resultat_cryptage, "resultat_cryptage.txt");
+	copier_resultat_cryptage(fichier_resultat_cryptage, texte_clair, code_alphabet);
+	fichier_resultat_cryptage.close();
+	
+	string nom_fichier_a_decrypter = choisir_texte_a_decrypter();
+	fstream fichier_a_decrypter(nom_fichier_a_decrypter, ios::in);
+	verification_fichier(fichier_a_decrypter, nom_fichier_a_decrypter);
+	vector<string> texte_a_decrypter = copier_texte(fichier_a_decrypter);
+	decryptage(texte_a_decrypter, huffman);
+	
+	fstream fichier_resultat_decryptage("resultat_decryptage.txt", ios::out | ios::trunc);
+	verification_fichier(fichier_resultat_decryptage, "resultat_decryptage.txt");
+	copier_resultat_decryptage(fichier_resultat_decryptage, texte_a_decrypter, huffman);
+	fichier_resultat_decryptage.close();
+	fichier_a_decrypter.close();
 }
