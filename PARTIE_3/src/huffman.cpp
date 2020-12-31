@@ -231,7 +231,7 @@ void codage_alphabet(ArbreB* A, map<char, string>& code_alphabet) {
  * description : afficher la lettre et son code correspondant
 */
 void afficher_code_alphabet(map<char, string>& code_alphabet) {
-	cout << "\t CODAGE DES LETTRES" << endl;
+	cout << "\t CODAGE DES CARACTERES" << endl;
 	for(int  i = 0; i < NOMBRE_CARACTERE; i++) {
 		if(code_alphabet[alphabet_latin[i]] != "")
 			cout << alphabet_latin[i] << ": " << code_alphabet[alphabet_latin[i]] << endl;
@@ -326,8 +326,13 @@ void decryptage(vector<string>& texte_crypte, list<ArbreB*>& huffman) {
 				tmp = tmp->getGauche();
 
 			if(!tmp) {
-				cerr << "Le code est inconnu" << endl;
+				cerr << "\nLe code est inconnu" << endl;
 				exit(2);
+			}
+
+			if(tmp->getSommet().getChar() == '\0' && i == (ligne.size()-1)) {
+				cerr << "\nLe code est inconnu" << endl;
+				exit(3);
 			}
 
 			if(tmp->getSommet().getChar() != '\0') {
@@ -350,8 +355,13 @@ void copier_resultat_decryptage(fstream& fichier, vector<string>& texte_crypte, 
 				tmp = tmp->getGauche();
 
 			if(!tmp) {
-				cerr << "Le code est inconnu" << endl;
-				exit(3);
+				cerr << "\nLe code est inconnu" << endl;
+				exit(4);
+			}
+
+			if(tmp->getSommet().getChar() == '\0' && i == (ligne.size()-1)) {
+				cerr << "\nLe code est inconnu" << endl;
+				exit(5);
 			}
 
 			if(tmp->getSommet().getChar() != '\0') {
@@ -451,6 +461,7 @@ void huffman() {
 	fstream fichier_a_decrypter(nom_fichier_a_decrypter, ios::in);
 	verification_fichier(fichier_a_decrypter, nom_fichier_a_decrypter);
 	vector<string> texte_a_decrypter = copier_texte(fichier_a_decrypter);
+	afficher_texte(texte_a_decrypter);
 	decryptage(texte_a_decrypter, huffman);
 	
 	fstream fichier_resultat_decryptage("resultat_decryptage.txt", ios::out | ios::trunc);
