@@ -68,12 +68,12 @@ vector<string> copier_texte(fstream& fichier){
 }
 
 /**
- * usage : determiner la fréquence d'une lettre dans une ligne
- * entrée : une lettre et une ligne d'un texte
- * retour : la frequence de la lettre dans la ligne
+ * usage : determiner la fréquence d'un caractère dans une ligne
+ * entrée : un caractère et une ligne d'un texte
+ * retour : la frequence du caractère dans la ligne
  *
  * description : lit caractère par caractère la ligne et incrémente la frequence de 1 chaque fois que le caractère lu
- * et identique à la lettre d'ont on évalue la fréquence.
+ * et identique au caractère d'ont on évalue la fréquence.
 */
 int calcul_freq(char c, string s) {
     int freq = 0;
@@ -85,11 +85,11 @@ int calcul_freq(char c, string s) {
 }
 
 /**
- * usage : calculer la fréquence de chaque lettre de l'alphabet dans un texte
+ * usage : calculer la fréquence de chaque caractère de l'alphabet dans un texte
  * entrée : un vecteur de string qui représente un texte, et une map de char et int qui represente le tableau de fréquence
- * de chaque lettre de l'alphabet.
+ * de chaque caractère de l'alphabet.
  *
- * description :lit ligne par ligne le texte pour chaque lettre et détermine leur fréquence avec la fonction calcul_freq()
+ * description :lit ligne par ligne le texte pour chaque caractère et détermine leur fréquence avec la fonction calcul_freq()
 */
 void calculer_frequence_alphabet(vector<string>& texte, map<char, int>& frequence_alphabet) {
 	int frequence;
@@ -116,12 +116,12 @@ void afficher_texte(vector<string>& texte) {
 }
 
 /**
- * usage : créer un sommet pour chaque lettre et sa frequence correspondante
+ * usage : créer un sommet pour chaque caractère et sa frequence correspondante
  * entrée :
  * 		-un vecteur de sommet qui représente le tableau de sommet que l'on va obtenir
- * 		-une map de char et int qui représente chaque lettre et leur fréquence correspondante.
+ * 		-une map de char et int qui représente chaque caractère et leur fréquence correspondante.
  *
- * description : créer un sommet pour chaque lettre à l'aide de la map, avec le constructeur par valeur
+ * description : créer un sommet pour chaque caractère à l'aide de la map, avec le constructeur par valeur
  * et l'ajoute au vecteur
 */
 void creer_sommets(vector<Sommet>& sommets, map<char, int>& frequence_alphabet) {
@@ -178,18 +178,18 @@ void afficher_arbres_arbo(list<ArbreB*>& arbres) {
 }
 
 /**
- * usage : determine le codage pour une lettre de l'alphabet
+ * usage : determine le codage pour un caractère de l'alphabet
  * entrée :
  * 		-l'arbre bianire d'huffman
- * 		-la lettre à coder
+ * 		-le caractère à coder
  * 		-le code qui est modifier à chaque fois que l'on parcourant l'arbre
- * 		-le resultat final du codage de la lettre
+ * 		-le resultat final du codage de le caractère
  *
  * description :
  * 		-parcoure l'arbre de manière récursive
  * 		-ajoute 1 au code lorsque l'on se déplace à gauche dans l'arbre
  * 		-ajoute 0 au code lorsque l'on se déplace à droite dans l'arbre
- * 		-si la lettre est trouvé le code devient resultat
+ * 		-si le caractère est trouvé le code devient resultat
  * 		-sinon le code n'est pas sauvgardé
 */
 void code_lettre(ArbreB* A, char lettre, string code, string& resultat) {
@@ -207,12 +207,12 @@ void code_lettre(ArbreB* A, char lettre, string code, string& resultat) {
 }
 
 /**
- * usage : determine le codage pour chaque lettre de l'alphabet
+ * usage : determine le codage pour chaque caractère de l'alphabet
  * entrée :
  * 		-l'arbre binaire d'huffman
- * 		-une map de char et string qui représente le codage de chaque lettre
+ * 		-une map de char et string qui représente le codage de chaque caractère
  *
- * description : utilise la fonction code_lettre pour déterminer le codage pour chaque lettre de l'alphabet
+ * description : utilise la fonction code_lettre pour déterminer le codage pour chaque caractère de l'alphabet
 */
 void codage_alphabet(ArbreB* A, map<char, string>& code_alphabet) {
 	for(int i = 0; i < NOMBRE_CARACTERE; i++) {
@@ -225,10 +225,10 @@ void codage_alphabet(ArbreB* A, map<char, string>& code_alphabet) {
 }
 
 /**
- * usage : afficher le code de chaque lettre de l'alphabet
- * entrée : une map de char et string qui représente le codage de chaque lettre
+ * usage : afficher le code de chaque caractère de l'alphabet
+ * entrée : une map de char et string qui représente le codage de chaque caractère
  *
- * description : afficher la lettre et son code correspondant
+ * description : afficher le caractère et son code correspondant
 */
 void afficher_code_alphabet(map<char, string>& code_alphabet) {
 	cout << "\t CODAGE DES CARACTERES" << endl;
@@ -240,8 +240,8 @@ void afficher_code_alphabet(map<char, string>& code_alphabet) {
 }
 
 /**
- * usage : savoir si un caractère fait parti des lettres de l'alphabet
- * entrée : le caractère à évaluer et un tableau de caractère qui représente les lettres de l'alphabet
+ * usage : savoir si un caractère fait parti des caractères de l'alphabet
+ * entrée : le caractère à évaluer et un tableau de caractère qui représente les caractères de l'alphabet
  * retour : un booléen
  * description : retourne vrai si le caractère et dans l'alphabet, sinon retourne faux
 */
@@ -256,7 +256,7 @@ bool in(char c, const char* alphabet_latin) {
 /**
  * usage : afficher un texte codé
  * entrée : un vecteur de string qui représente le texte et une map de char et de string qui représente
- * le code de chaque lettre de l'alphabet
+ * le code de chaque caractère de l'alphabet
  *
  * description : affiche le texte codé
 */
@@ -278,7 +278,7 @@ void cryptage(vector<string>& texte, map<char, string>& code_alphabet) {
 /**
  * usage : copier le texte codé dans un fichier texte
  * entrée : le fichier texte, un vecteur de string qui représente le texte à copier
- * et une map de char/string qui représente le code de chaque lettre de l'alphabet
+ * et une map de char/string qui représente le code de chaque caractère de l'alphabet
  *
  * description : copie bit par bit le code du texte dans un fichier texte
 */
@@ -297,7 +297,7 @@ void copier_resultat_cryptage(fstream& fichier, vector<string>& texte, map<char,
 }
 
 /**
- * usage : choisir le fichier texte sur lequel appliquer l'algorythme de decryptage du codage de huffman
+ * usage : choisir le fichier texte sur lequel appliquer l'algorithme de décryptage du codage de huffman
  * retour : le nom du fichier
  *
  * description :
@@ -315,6 +315,13 @@ string choisir_texte_a_decrypter() {
 	return nom_fichier;
 }
 
+/**
+ * usage : afficher un texte clair à partir d'un texte crypté
+ * entrée : un vecteur de string qui représente le texte crypté et un arbre binaire généré par l'algorithme de huffman
+ * qui représente le code de chaque caractère de l'alphabet
+ *
+ * description : affiche le texte clair décrypté
+*/
 void decryptage(vector<string>& texte_crypte, list<ArbreB*>& huffman) {
 	cout << "\t RESULTAT DU DECRYPTAGE" << endl;
 	for(string& ligne : texte_crypte) {
@@ -345,6 +352,14 @@ void decryptage(vector<string>& texte_crypte, list<ArbreB*>& huffman) {
 	cout << endl;
 }
 
+/**
+ * usage : copier le texte clair décrypté dans un fichier texte
+ * entrée : le fichier texte, un vecteur de string qui représente le texte à décrypté
+ * et un arbre binaire généré par l'algorithme de huffman qui représente le code de chaque caractère de l'alphabet
+ *
+ * description : décrypte bit par bit le code en parcourant l'arbre de huffman et copie le caractère du code parcouru
+ * dans un fichier texte
+*/
 void copier_resultat_decryptage(fstream& fichier, vector<string>& texte_crypte, list<ArbreB*>& huffman) {
 	for(string& ligne : texte_crypte) {
 		ArbreB* tmp = huffman.front();
@@ -378,19 +393,27 @@ void copier_resultat_decryptage(fstream& fichier, vector<string>& texte_crypte, 
  * usage : prendre un texte et le coder avec l'algorithme de huffman
  *
  * description :
- * 		-ouvre le fichier donner par l'utilisateur
+ * 		-ouvre le fichier de texte à crypter donné par l'utilisateur
  * 		-vérifie son ouverture
- * 		-copie le texte du fichier
- * 		-afficher le texte
- * 		-détermine la fréquence de chaque lettre dans le texte
- * 		-créer un sommet pour chaque lettre dans un vecteur
+ * 		-copie le texte du fichier à crypter
+ * 		-détermine la fréquence de chaque caractère dans le texte
+ * 		-créé un sommet pour chaque caractère dans un vecteur
  * 		-trie le vecteur de sommet
- * 		-créer les feuilles de l'arbre d'huffman
+ * 		-créé les feuilles de l'arbre d'huffman
  * 		-construit des pairs de feuilles en fonction de la fréquence du sommet
- * 		-construit l'arbre d'huffman en fonction de la fréquence de chaque lettre
- * 		-affiche l'arborecence de l'arbre d'huffman
- * 		-code les lettres de l'alphabet avec l'arbre d'huffman
- * 		-affiche le code de chaque lettre de l'alphabet
+ * 		-construit l'arbre d'huffman en fonction de la fréquence de chaque caractère
+ *	 	-code les caractères de l'alphabet avec l'arbre d'huffman
+ *		-crypte le texte à crypter avec le code correspondant aux caractères dans un fichier
+ * 		-affiche le code de chaque caractère de l'alphabet
+ * 		-affiche l'arborescence de l'arbre d'huffman
+ *		-affiche le texte du fichier a crypter
+ *		-affiche le résultat du cryptage
+ *		-ouvre le fichier de texte à décrypter donné par l'utilisateur
+ *		-vérifie son ouverture
+ *		-copie le texte du fichier à décrypter
+ *		-affiche le texte à décrypter
+ *		-décrypte le texte à décrypter à l'aide de l'arbre généré précédemment avec l'algorithme de huffman dans un fichier
+ *		-affiche le résultat du décryptage
 */
 void huffman() {
 	string nom_fichier_a_crypter = choisir_texte_a_crypter();
@@ -421,10 +444,7 @@ void huffman() {
 		if(taille%2 == 1 && i == taille/2) {
 			r.fusionner_huffman(feuilles[feuilles.size()-index], feuilles[feuilles.size()-(index+1)]);
 			huffman.push_back(new ArbreB(&r));
-			ArbreB A(feuilles[0]);
-			A.setGaucheToNull();
-			A.setDroiteToNull();
-			huffman.push_back(new ArbreB(&A));
+			huffman.push_back(new ArbreB(feuilles[0]));
 		}
 		else {
 			r.fusionner_huffman(feuilles[feuilles.size()-index], feuilles[feuilles.size()-(index+1)]);

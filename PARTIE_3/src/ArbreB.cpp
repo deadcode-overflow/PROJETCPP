@@ -130,20 +130,6 @@ ArbreB* ArbreB::getPrecedent() {
 	return precedent;
 }
 
-void ArbreB::setDroiteToNull() {
-	droite = nullptr;
-}
-
-void ArbreB::setGaucheToNull() {
-	gauche = nullptr;
-}
-
-void ArbreB::setPrecedent() {
-	if(precedent)
-		delete precedent;
-	precedent = new ArbreB(racine);
-}
-
 /**
  * usage : setter de @freq
  * retour : nouvelle @freq de l'arbre courant qui est l'addition des deux fréquences des ses sous-arbres
@@ -440,9 +426,9 @@ Sommet& ArbreB::rechercher(Sommet& s) {
 		}
 	}
 
-	cout << "le sommet n'existe pas dans l'arbre" << endl;
-
-	return s;
+	cerr << "le sommet n'existe pas dans l'arbre" << endl;
+	Sommet vide;
+	return vide;
 }
 
 /**

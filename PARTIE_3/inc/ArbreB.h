@@ -28,9 +28,6 @@ class ArbreB : public Sommet
 		ArbreB* getDroite();
 		ArbreB* getGauche();
 		ArbreB* getPrecedent();
-		void setDroiteToNull();
-		void setGaucheToNull();
-		void setPrecedent();
 		ArbreB& setFreq(ArbreB* A1, ArbreB* A2);
 
 		// Méthodes
@@ -42,15 +39,15 @@ class ArbreB : public Sommet
 		ArbreB& fusionner_huffman(ArbreB* A1, ArbreB* A2);
 		void decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A);
 		void affichage_infixe(ArbreB* A); //affichage infixe
-		void afficher_arbo(int hauteur, int cote, ArbreB* A); //affichage arborescent
+		void afficher_arbo(int hauteur, int cote, ArbreB* A); //affichage en arborescence
 
 		//---------------------------------
-		int hauteur(ArbreB* A, int hg, int hd); //calcule la hauteur de l'arbre
-		int nombre_element(ArbreB* A); //calcule le nombre d'élément dans l'arbre
-		ArbreB* min(ArbreB* A); //retourne l'arbre (feuille) minimal de l'arbre
-		ArbreB* max(ArbreB* A); //retourne l'arbre (feuille) maximal de l'arbre
-		void copier(ArbreB* destination, ArbreB* source, Sommet& racine_destination); //sert pour constructeur copie
-		void recupererGauche(ArbreB* Ag, ArbreB* A); //recupere le sous-arbre gauche d'un arbre binaire
-		void recupererDroite(ArbreB* Ad, ArbreB* A); //recupere le sous-arbre droit d'un arbre binaire
+		int hauteur(ArbreB* A, int hg, int hd);
+		int nombre_element(ArbreB* A);
+		ArbreB* min(ArbreB* A);
+		ArbreB* max(ArbreB* A);
+		void copier(ArbreB* destination, ArbreB* source, Sommet& racine_destination);
+		void recupererGauche(ArbreB* Ag, ArbreB* A);
+		void recupererDroite(ArbreB* Ad, ArbreB* A);
 };
 #endif
