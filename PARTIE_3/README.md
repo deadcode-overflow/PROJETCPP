@@ -51,7 +51,7 @@
  Entrez le fichier de test à crypter `texte.txt`, pour tester le cryptage.
  Une fois le cryptage terminé, un fichier `resultat_cryptage.txt` est créé. Il contient le résultat du cryptage du fichier de texte sélectionné.
 
- Entrez un fichier à décrypter. *(Vous pouvez utiliser `résultat_cryptage.txt` pour vérifier que le décryptage du fichier crypté s'effectue correctement. Ou alors vous pouvez entrer `code.txt` pour vérifier que le décryptage d'un code inconnu n'est pas reconnu par le programme.)*
+ Entrez un fichier à décrypter. *(Vous pouvez utiliser `resultat_cryptage.txt` pour vérifier que le décryptage du fichier crypté s'effectue correctement. Ou alors vous pouvez entrer `code.txt` pour vérifier que le décryptage d'un code inconnu n'est pas reconnu par le programme.)*
 
  ## Suppression du projet
  ---
