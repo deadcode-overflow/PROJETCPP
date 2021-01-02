@@ -65,7 +65,7 @@
  ---
  Le fichier `huffman.cpp` definie la fonction `huffman` qui contient les fonctions qui permettent de `crypter` et `decrypter` un fichier texte donné par l'utilisateur et de créer l'arbre d'Huffman.
 
- Le programme est divisé en x fonctions.
+ Le programme est divisé en 20 fonctions :
 
   * `choisir_texte_a_crypter()` est une fonction qui permet à l'utilisateur de choir un fichier texte sur lequel appliquer le cryptage à l'aide de l'algorithme de Huffman. Elle retourne le nom du fichier texte.
 
