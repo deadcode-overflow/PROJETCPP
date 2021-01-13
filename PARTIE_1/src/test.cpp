@@ -58,6 +58,7 @@ int test() {
     A.ajouter(s2);
     cout << "ajout de s2 dans l'arbre" << endl;
     A.afficher(&A);
+    A.print_t(0,0,&A);
     
     //test ajout de plusieurs sommet dans l'arbre
     Sommet s4('C',1);
@@ -86,6 +87,7 @@ int test() {
     cout << "modification du sommet s6 dans l'arbre par 'K' '6'" << endl;
     cout << "s6 -> " << s6 << endl;
     A.afficher(&A);
+    A.print_t(0,0,&A);
     
     //test hauteur de l'arbre
     cout << "hauteur de l'arbre A : " << A.hauteur(&A,0,0) << endl;;
@@ -99,6 +101,7 @@ int test() {
     cout << "s5 -> " << s5;
     cout << "suppression du sommet s5 dans l'arbre A" << endl;
     A.afficher(&A);
+    A.print_t(0,0,&A);
     
     //test affichage arbre amélioré
     Sommet s8('G', 1);
