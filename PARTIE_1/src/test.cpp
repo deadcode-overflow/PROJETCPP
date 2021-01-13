@@ -74,6 +74,7 @@ int test() {
     A.ajouter(s7);
     cout << "ajout de plusieurs sommets dans l'arbre" << endl;
     A.afficher(&A);
+    A.print_t(0,0,&A);
     
     //test rechecher un sommet dans l'arbre
     Sommet sommetArbre = A.rechercher(s5);
