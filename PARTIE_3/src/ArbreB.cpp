@@ -409,7 +409,7 @@ ArbreB& ArbreB::supprimer(Sommet& s) {
  *
  * description : effectue un parcours d'arbre à l'aide d'un pointeur et une fois le sommet trouvé, on le renvoie
 */
-Sommet& ArbreB::rechercher(Sommet& s) {
+Sommet ArbreB::rechercher(Sommet& s) {
 	ArbreB* tmp = this;
 
 	while(tmp) {

@@ -33,13 +33,13 @@ class ArbreB : public Sommet
 		// Méthodes
 		ArbreB& ajouter(Sommet& s);
 		ArbreB& supprimer(Sommet& s);
-		Sommet& rechercher(Sommet& s);
+		Sommet rechercher(Sommet& s);
 		ArbreB& modifier(Sommet& s, char c, int f);
 		ArbreB& fusionner(ArbreB* A);
 		ArbreB& fusionner_huffman(ArbreB* A1, ArbreB* A2);
 		void decomposer(ArbreB* Ag, ArbreB* Ad, ArbreB* A);
-		void affichage_infixe(ArbreB* A); //affichage infixe
-		void afficher_arbo(int hauteur, int cote, ArbreB* A); //affichage en arborescence
+		void affichage_infixe(ArbreB* A);
+		void afficher_arbo(int hauteur, int cote, ArbreB* A);
 
 		//---------------------------------
 		int hauteur(ArbreB* A, int hg, int hd);
