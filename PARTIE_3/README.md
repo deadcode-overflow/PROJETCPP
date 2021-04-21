@@ -82,9 +82,9 @@
 
   * `comparaison_sommet` est une fonction qui permet de spécifier la manière dont la fonction `std::sort` trie les sommets du vecteur de sommet. On trie les sommets en fonction de la fréquence du caractère qu'elles contiennent. Dans tous les cas, le premier sommet sera considéré plus petit que le deuxième.
   
-  * `afficher_arbres_infixe` est une fonction qui permet d'afficher de manière infixe une liste d'arbre binaire `ArbreB`. Elle utilise la méthode `affichage_infixe` de `ArbreB` et elle prend en paramètre une liste d'arbre bainaire.
+  * `afficher_arbres_infixe` est une fonction qui permet d'afficher de manière infixe une liste d'arbre binaire `ArbreB`. Elle utilise la méthode `affichage_infixe` de `ArbreB` et elle prend en paramètre une liste d'arbre binaire.
 
-  * `afficher_arbres_arbo` est une fonction qui permet d'afficher de manière arborescente une liste d'arbre binaire `ArbreB`. Elle utilise la méthode `afficher_arbo` de `ArbreB` et elle prend en paramètre une liste d'arbre bainaire.
+  * `afficher_arbres_arbo` est une fonction qui permet d'afficher de manière arborescente une liste d'arbre binaire `ArbreB`. Elle utilise la méthode `afficher_arbo` de `ArbreB` et elle prend en paramètre une liste d'arbre binaire.
 
   * `codage_alphabet` est une fonction qui détermine le code pour chaque caractère du texte à l'aide de l'arbre de Huffman et qui sauvegarde le résultat dans une `map`. Elle utilise la fonction `code_lettre` qui fonctionne de la manière suivante :
     - Le `code` est représenté par un `string`.
